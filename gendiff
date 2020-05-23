@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+//require __DIR__.'/src/docopt.php';
+require __DIR__.'/vendor/autoload.php';
+//use Docopt;
+
+
+$doc = <<<DOC
+Generate diff
+
+Usage:
+  gendiff (-h|--help)
+  gendiff (-v|--version)
+  gendiff (-t|--temestart)
+
+Options:
+  -h --help     Show this screen.
+  --version     Show version.
+  --timestart   Show when start.
+DOC;
+
+$args = Docopt::handle($doc, array('version'=>'Generate diff v0.01'));
+//$args = Docopt::handle($doc, array('timestart'=>'now'));
+foreach ($args as $k=>$v)
+    echo $k.': '.json_encode($v).PHP_EOL;

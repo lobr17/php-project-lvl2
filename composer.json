@@ -1,0 +1,25 @@
+{
+    "name": "yason/gendiff",
+    "bin": [
+	"./gendiff"
+    ],
+    "description": "second package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Konstantin",
+            "email": "konpichugin@yandex.ru"
+        }
+    ],
+    "require": {
+        "docopt/docopt": "^1.0"
+    },
+    "scripts": {
+    	"gendiff": "gendiff"
+    },
+    "autoload": {
+    	"files": [
+	"src/docopt.php"
+	]
+    }
+}
