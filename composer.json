@@ -14,9 +14,6 @@
     "require": {
         "docopt/docopt": "^1.0"
     },
-    "scripts": {
-    	"gendiff": "gendiff"
-    },
     "autoload": {
     	"files": [
 	"src/docopt.php"
