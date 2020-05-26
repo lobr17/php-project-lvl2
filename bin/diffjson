@@ -1,0 +1,11 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+
+$pathToFile1 = 'workfiles/before.json';
+$pathToFile2 = 'workfiles/after.json';
+
+$diff = \Differ\Differ\diff\genDiff($pathToFile1, $pathToFile2);
+print_r($diff);

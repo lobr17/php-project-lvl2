@@ -3,7 +3,7 @@
     "bin": [
 	"./gendiff"
     ],
-    "description": "second package",
+    "description": "diff json files",
     "license": "MIT",
     "authors": [
         {
@@ -16,7 +16,8 @@
     },
     "autoload": {
     	"files": [
-	"src/docopt.php"
+	"vendor/docopt/docopt/src/docopt.php",
+	"src/diff.php"
 	]
     }
 }
