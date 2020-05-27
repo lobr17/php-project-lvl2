@@ -17,7 +17,7 @@
     "autoload": {
     	"files": [
 	"/docopt.php",
-	"src/diff.php"
+	"../../docopt/docopt/src/diff.php"
 	]
     }
 }
