@@ -16,8 +16,8 @@
     },
     "autoload": {
     	"files": [
-	"/../../../docopt/docopt/src/docopt.php",
-	"/src/diff.php"
+	"./vendor/docopt/docopt/src/docopt.php",
+	"./src/diff.php"
 	]
     }
 }
