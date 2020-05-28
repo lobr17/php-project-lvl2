@@ -14,10 +14,16 @@
     "require": {
         "docopt/docopt": "^1.0"
     },
+    "scripts": {
+        "phpcs": "phpcs"
+    },
     "autoload": {
     	"files": [
 	"./vendor/docopt/docopt/src/docopt.php",
 	"./src/diff.php"
 	]
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "*"
     }
 }

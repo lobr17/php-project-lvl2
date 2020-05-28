@@ -13,7 +13,7 @@ function genDiff($pathToFile1, $pathToFile2)
 $result = [];
 
 foreach ($before as $keyBef => $valueBef) {
-    foreach ($after as $keyAft => $valueAft) {
+     foreach ($after as $keyAft => $valueAft) {
         if ($keyBef === $keyAft and $before[$keyBef] === $after[$keyAft]) {
             $result[] = $keyBef . ': ' . $valueBef;
         } elseif ($keyBef === $keyAft and $before[$keyBef] !== $after[$keyAft]) {
