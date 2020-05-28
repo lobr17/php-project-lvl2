@@ -9,7 +9,6 @@ namespace Differ\Differ\diff;
 
 function genDiff($pathToFile1, $pathToFile2)
 {
-
     $before = json_decode(file_get_contents($pathToFile1), true);
     $after = json_decode(file_get_contents($pathToFile2), true);
 
