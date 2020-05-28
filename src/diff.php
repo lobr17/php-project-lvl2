@@ -6,7 +6,8 @@
  *
  */
 
- namespace Differ\Differ\diff;
+
+namespace Differ\Differ\diff;
 
 
 function genDiff($pathToFile1, $pathToFile2)
