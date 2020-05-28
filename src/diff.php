@@ -5,7 +5,6 @@
  *  diff.php
 */
 
-
 namespace Differ\Differ\diff;
 
 function genDiff($pathToFile1, $pathToFile2)
