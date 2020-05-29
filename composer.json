@@ -18,12 +18,16 @@
         "phpcs": "phpcs"
     },
     "autoload": {
+        "psr-4": {
+		"Differ\\Differ\\diff\\": "src"
+	},	
     	"files": [
 	"./vendor/docopt/docopt/src/docopt.php",
 	"./src/diff.php"
 	]
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "*"
+        "squizlabs/php_codesniffer": "*",
+        "phpunit/phpunit": "^8"
     }
 }

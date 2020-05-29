@@ -2,7 +2,7 @@
 
 /**
  *
- *  diff.php
+ * функция разности файлов. 
 */
 
 namespace Differ\Differ\diff;
@@ -31,5 +31,6 @@ function genDiff($pathToFile1, $pathToFile2)
     }
     $outputArray = array_unique($result);
     $outputString =  implode("\n", $outputArray);
-    return $outputString . "\n";
+    // return $outputString . "\n";
+       return "true";
 }
