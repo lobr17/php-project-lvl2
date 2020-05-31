@@ -1,14 +1,26 @@
 <?php
 
-namespace Differ;
+namespace Tests;
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
-require_once "src/diff.php";
+use function Differ\Differ\diff\genDiff;
 
 class diffTest extends TestCase
 {
 	public function testDiff()
 	{
-		$this->assertTrue(Differ\diff\genDiff('workfiles/before.php', 'workfiles/after.php'));
+		$actual = genDiff('before.json', 'after.json');
+		$expected = "+ verbose:1
+                             host: hexlet.io
+                              + timeout: 20
+                              - timeout: 50
+                                 - proxy: 123.234.53.22
+                              + path: NEher
+                             - path: her";
+
+		$this->assertEquals($expected, $actual);
 	}
 }
+

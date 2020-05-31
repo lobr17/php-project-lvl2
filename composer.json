@@ -17,10 +17,7 @@
     "scripts": {
         "phpcs": "phpcs"
     },
-    "autoload": {
-        "psr-4": {
-		"Differ\\Differ\\diff\\": "src"
-	},	
+    "autoload": {	
     	"files": [
 	"./vendor/docopt/docopt/src/docopt.php",
 	"./src/diff.php"
