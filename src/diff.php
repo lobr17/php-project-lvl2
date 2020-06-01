@@ -2,14 +2,14 @@
 
 /**
  *
- * функция разности файлов. 
-*/
+ * функция разности файлов.
+ */
 
 namespace Differ\Differ\diff;
 
 function genDiff($nameFile1, $nameFile2)
 {
-    $folderWithFiles = 'workfiles/';	
+    $folderWithFiles = 'workfiles/';
     $pathToFile1 = $folderWithFiles . $nameFile1;
     $pathToFile2 = $folderWithFiles . $nameFile2;	    
     $before = json_decode(file_get_contents($pathToFile1), true);
