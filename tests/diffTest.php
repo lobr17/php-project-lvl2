@@ -9,18 +9,17 @@ use function Differ\Differ\diff\genDiff;
 
 class diffTest extends TestCase
 {
-	public function testDiff()
-	{
-		$actual = genDiff('before.json', 'after.json');
-		$expected =
+    public function testDiff()
+    {
+        $actual = genDiff('before.json', 'after.json');
+        $expected =
 "+ verbose:1
 host: hexlet.io
 + timeout: 20
 - timeout: 50
 - proxy: 123.234.53.22
 ";
-
-		$this->assertEquals($expected, $actual);
-	}
+        $this->assertEquals($expected, $actual);
+    }
 }
 

@@ -11,7 +11,7 @@ function genDiff($nameFile1, $nameFile2)
 {
     $folderWithFiles = 'workfiles/';
     $pathToFile1 = $folderWithFiles . $nameFile1;
-    $pathToFile2 = $folderWithFiles . $nameFile2;	    
+    $pathToFile2 = $folderWithFiles . $nameFile2;
     $before = json_decode(file_get_contents($pathToFile1), true);
     $after = json_decode(file_get_contents($pathToFile2), true);
 
