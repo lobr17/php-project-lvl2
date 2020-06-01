@@ -7,13 +7,12 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use PHPUnit\Framework\TestCase;
 use function Differ\Differ\diff\genDiff;
 
-class diffTest extends TestCase
+class DiffTest extends TestCase
 {
     public function testDiff()
     {
         $actual = genDiff('before.json', 'after.json');
-        $expected =
-        "+ verbose:1
+        $expected = "+ verbose:1
 host: hexlet.io
 + timeout: 20
 - timeout: 50
