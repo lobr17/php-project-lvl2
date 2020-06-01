@@ -16,6 +16,7 @@
     },
     "scripts": {
         "phpcs": "phpcs",
+	"phpcbf": "phpcbf",
 	"phpunit": "phpunit tests"
     },
     "autoload": {	

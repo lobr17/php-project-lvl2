@@ -13,7 +13,7 @@ class diffTest extends TestCase
     {
         $actual = genDiff('before.json', 'after.json');
         $expected =
-"+ verbose:1
+        "+ verbose:1
 host: hexlet.io
 + timeout: 20
 - timeout: 50
@@ -22,4 +22,3 @@ host: hexlet.io
         $this->assertEquals($expected, $actual);
     }
 }
-
