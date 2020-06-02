@@ -2,8 +2,6 @@
 
 namespace Tests;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
 use PHPUnit\Framework\TestCase;
 use function Differ\Differ\diff\genDiff;
 
