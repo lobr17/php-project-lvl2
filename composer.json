@@ -17,7 +17,8 @@
     "scripts": {
         "phpcs": "phpcs",
 	"phpcbf": "phpcbf",
-	"phpunit": "phpunit tests"
+	"phpunit": "phpunit",
+	"test": "phpunit tests"
     },
     "autoload": {	
     	"files": [
@@ -27,6 +28,7 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*",
-        "phpunit/phpunit": "^8"
+        "phpunit/phpunit": "^8",
+        "codeclimate/php-test-reporter": "^0.4.4"
     }
 }
