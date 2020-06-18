@@ -29,6 +29,7 @@
     "require-dev": {
         "squizlabs/php_codesniffer": "*",
         "phpunit/phpunit": "^8",
-        "codeclimate/php-test-reporter": "^0.4.4"
+        "codeclimate/php-test-reporter": "^0.4.4",
+        "tightenco/collect": "^7.12"
     }
 }

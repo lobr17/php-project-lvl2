@@ -2,7 +2,10 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$diff = Differ\Differ\diff\genDiff('before.json','after.json');
+use Symfony\Component\Yaml\Yaml;
+
+
+//$diff = Differ\Differ\diff\genDiff('before.json','after.json');
 //print_r($diff);
 
 $expected = "+ verbose:1
@@ -14,4 +17,13 @@ host: hexlet.io
 - path: her";
 
 
-print_r($expected);
+//print_r($expected);
+
+$object = new \stdClass();
+//$object->foo = 'bar';
+
+$dumper = Yaml::dump(['data' => 'object'], 2, 4, Yaml::DUMP_OBJECT_AS_MAP);
+$parsed = Yaml::parse($dumper, Yaml::PARSE_OBJECT_FOR_MAP);
+
+print_r($parsed);
+
