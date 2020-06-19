@@ -23,7 +23,8 @@
     "autoload": {	
     	"files": [
 	"./vendor/docopt/docopt/src/docopt.php",
-	"./src/diff.php"
+	"./src/diff.php",
+	"./src/parsers.php"
 	]
     },
     "require-dev": {
