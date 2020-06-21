@@ -10,7 +10,9 @@ namespace Differ\Differ\diff;
 require_once __DIR__ . "/../vendor/autoload.php";
 
 use Symfony\Component\Yaml\Yaml;
-use Differ\Differ\parsers;
+use function Differ\Differ\parsers\getPathToFile;
+use function Differ\Differ\parsers\getFormatDecoder;
+
 
 function diffArray($array1, $array2)
 {

@@ -6,13 +6,14 @@
  */
 
 namespace Differ\Differ\parsers;
+use Symfony\Component\Yaml\Yaml;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
 
 function getPathToFile($nameFile1, $nameFile2)
 {
-    $folderWithFiles = 'workfiles/';
+    $folderWithFiles = './workfiles/';
     $pathToFile1 = $folderWithFiles . $nameFile1;
     $pathToFile2 = $folderWithFiles . $nameFile2;
 

@@ -1,7 +1,7 @@
 {
     "name": "yason/gendiff",
     "bin": [
-	"bin/gendiff"
+	"bin/gendiff1"
     ],
     "description": "diff json files",
     "license": "MIT",
@@ -22,9 +22,9 @@
     },
     "autoload": {	
     	"files": [
-	"./vendor/docopt/docopt/src/docopt.php",
-	"./src/diff.php",
-	"./src/parsers.php"
+	"vendor/docopt/docopt/src/docopt.php",
+	"src/diff.php",
+	"src/parsers.php"
 	]
     },
     "require-dev": {
