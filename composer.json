@@ -23,7 +23,8 @@
     "autoload": {	
     	"files": [
 	"src/diff.php",
-	"src/parsers.php"
+	"src/parsers.php",
+	"vendor/symfony/yaml/Yaml.php"
 	]
     },
     "require-dev": {
