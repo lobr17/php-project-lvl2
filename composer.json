@@ -1,7 +1,7 @@
 {
     "name": "yason/gendiff",
     "bin": [
-	"bin/gendiff1"
+	"bin/gendiff"
     ],
     "description": "diff json files",
     "license": "MIT",
@@ -24,7 +24,7 @@
     	"files": [
 	"src/diff.php",
 	"src/parsers.php",
-	"vendor/symfony/yaml/Yaml.php"
+	"./vendor/symfony/yaml/Yaml.php"
 	]
     },
     "require-dev": {

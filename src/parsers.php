@@ -41,7 +41,7 @@ function decoderYamlInPhp($pathToFile1, $pathToFile2)
     $before = Yaml::parse(file_get_contents($pathToFile1), Yaml::PARSE_OBJECT_FOR_MAP);
     $after = Yaml::parse(file_get_contents($pathToFile2), Yaml::PARSE_OBJECT_FOR_MAP);
 
-    return [(array) $before,(array) $after];
+    return [$before, $after];
 }
 
 function decoderJsonInPhp($pathToFile1, $pathToFile2)
