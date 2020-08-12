@@ -48,9 +48,11 @@ function diffArray($array1, $array2, $option = null)
 
 function render($array)
 {
-    $result = array_map(function ($child) {
+    $out = '';
+    $result = array_map(function ($child) use ($out) {
         if ($child['type'] === '-') {
-            return "{$child['type']}, {$child['name']}, {$child['children']}";
+            $out .= "{$child['type']}, {$child['name']}, {$child['children']}";
+            return $out;
         } elseif ($child['type'] === '+') {
             return "{$child['type']}, {$child['name']}, {$child['children']}";
         } elseif ($child['type'] === 'has not changed') {
@@ -58,13 +60,22 @@ function render($array)
         } elseif ($child['type'] === 'changed') {
             return "{$child['type']}, {$child['name']}, {$child['children']}";
         } elseif ($child['type'] === 'nested') {
-            
-            $result = array_map(function ($subChild) {
+            unset($child['type']);
+            $key = array_keys($child);
+            print_r($key);
+
+            $result = array_map(function ($subChild) use ($child, $key) {
+                //unset($child['type']);
+                //$key = array_keys($child);
+                //print_r($key);
+               // print_r(nl2br(PHP_EOL));
+               // print_r(nl2br(PHP_EOL));
+
                 if (is_array($subChild)) {
-                    return render($subChild);
+                    return [$key, render($subChild)];
                 }
             }, $child);
-            
+
             return $result;
         }
        // print_r(nl2br(PHP_EOL));
