@@ -10,6 +10,7 @@ namespace Differ\Differ\diff;
 //require_once __DIR__ . "/../vendor/autoload.php";
 
 use Symfony\Component\Yaml\Yaml;
+use function Differ\Differ\Render\render;
 use function Differ\Differ\parsers\getPathToFile;
 use function Differ\Differ\parsers\getFormatDecoder;
 
@@ -46,43 +47,6 @@ function diffArray($array1, $array2, $option = null)
     return $result;
 }
 
-function render($array)
-{
-    $out = '';
-    $result = array_map(function ($child) use ($out) {
-        if ($child['type'] === '-') {
-            $out .= "{$child['type']}, {$child['name']}, {$child['children']}";
-            return $out;
-        } elseif ($child['type'] === '+') {
-            return "{$child['type']}, {$child['name']}, {$child['children']}";
-        } elseif ($child['type'] === 'has not changed') {
-            return "{$child['type']}, {$child['name']}, {$child['children']}";
-        } elseif ($child['type'] === 'changed') {
-            return "{$child['type']}, {$child['name']}, {$child['children']}";
-        } elseif ($child['type'] === 'nested') {
-            unset($child['type']);
-            $key = array_keys($child);
-            print_r($key);
-
-            $result = array_map(function ($subChild) use ($child, $key) {
-                //unset($child['type']);
-                //$key = array_keys($child);
-                //print_r($key);
-               // print_r(nl2br(PHP_EOL));
-               // print_r(nl2br(PHP_EOL));
-
-                if (is_array($subChild)) {
-                    return [$key, render($subChild)];
-                }
-            }, $child);
-
-            return $result;
-        }
-       // print_r(nl2br(PHP_EOL));
-    }, $array);
-
-    return $result;
-}
 
 
 function genDiff($nameFile1, $nameFile2)

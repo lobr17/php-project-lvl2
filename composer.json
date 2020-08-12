@@ -23,6 +23,7 @@
     "autoload": {	
     	"files": [
 	"src/diff.php",
+	"src/Render.php",
 	"src/parsers.php",
 	"./vendor/symfony/yaml/Yaml.php"
 	]
