@@ -14,55 +14,61 @@ use function Differ\Differ\parsers\getPathToFile;
 use function Differ\Differ\parsers\getFormatDecoder;
 
 
-function diffArray($array1, $array2)
+function diffArray($array1, $array2, $option = null)
 {
 
-    $collection1 = collect($array1);
-    $collection2 = collect($array2);
+	$keys1 = array_keys($array1);
+    $keys2 = array_keys($array2);
+    $fish = array_unique(array_merge($keys1, $keys2));
 
-//одинаковые ключи и значения
-    $diff1 = $collection1->intersectByKeys($array2)->intersect($array2);
-    $multiplied1 = $diff1->map(function ($item, $key) {
-        return "{$key}: {$item}";
-    })
-    ->values()
-    ->all();
+    $result = array_map(function ($key) use ($array1, $array2, $keys1, $keys2, $option) {
+        //ключ есть только в before.
+        if (!in_array($key, $keys2)) {
+            return ['name' => $key, 'type' => '-', 'children' => $array1[$key]];
+        //ключ есть только в after.
+        } elseif (!in_array($key, $keys1)) {
+            return ['name' => $key, 'type' => '+', 'children' => $array2[$key]];
+        //одинаковые ключи.
+        } elseif (in_array($key, $keys1) and in_array($key, $keys2)) {
+            //значения НЕ объекты.
+            if (!is_array($array1[$key]) and !is_array($array2[$key])) {
+                if ($array1[$key] === $array2[$key]) {
+                    return ['name' => $key, 'type' => 'has not changed', 'children' => $array1[$key]];
+                } elseif ($array1[$key] !== $array2[$key]) {
+                    return ['name' => $key, 'type' => 'changed', 'children' => '-' . $array1[$key] . ' +' . $array2[$key]];
+                }
+             //значения объекты.
+            } elseif (is_array($array1[$key]) and is_array($array2[$key])) {
+                return [$key => diffArray($array1[$key], $array2[$key]), 'type' => 'nested'];
+            }
+        }
+    }, $fish);
+    return $result;
+}
 
-//after при одинаковых ключах, но разных значениях
-    $diff2 = $collection2->intersectByKeys($array1)->diffAssoc($array1);
-    $multiplied2 = $diff2->map(function ($item, $key) {
-        return "+ {$key}: {$item}";
-    })
-    ->values()
-    ->all();
-
-//before при одинаковых ключах, но разных значениях
-    $diff3 = $collection1->intersectByKeys($array2)->diffAssoc($array2);
-    $multiplied3 = $diff3->map(function ($item, $key) {
-        return "- {$key}: {$item}";
-    })
-    ->values()
-    ->all();
-
-//есть в before, но нет в after.
-    $diff4 = $collection1->diffKeys($array2);
-    $multiplied4 = $diff4->map(function ($item, $key) {
-        return "- {$key}: {$item}";
-    })
-    ->values()
-    ->all();
-
-//нет в before, но есть в after.
-    $diff5 = $collection2->diffKeys($array1);
-    $multiplied5 = $diff5->map(function ($item, $key) {
-        return "+ {$key}: {$item}";
-    })
-    ->values()
-    ->all();
-
-//собираем все массивы и преобразуем в строку.
-    $result1 = collect($multiplied1);
-    $result = $result1->merge($multiplied2)->merge($multiplied3)->merge($multiplied4)->merge($multiplied5)->implode("\n");
+function render($array)
+{
+    $result = array_map(function ($child) {
+        if ($child['type'] === '-') {
+            return "{$child['type']}, {$child['name']}, {$child['children']}";
+        } elseif ($child['type'] === '+') {
+            return "{$child['type']}, {$child['name']}, {$child['children']}";
+        } elseif ($child['type'] === 'has not changed') {
+            return "{$child['type']}, {$child['name']}, {$child['children']}";
+        } elseif ($child['type'] === 'changed') {
+            return "{$child['type']}, {$child['name']}, {$child['children']}";
+        } elseif ($child['type'] === 'nested') {
+            
+            $result = array_map(function ($subChild) {
+                if (is_array($subChild)) {
+                    return render($subChild);
+                }
+            }, $child);
+            
+            return $result;
+        }
+       // print_r(nl2br(PHP_EOL));
+    }, $array);
 
     return $result;
 }
@@ -76,5 +82,5 @@ function genDiff($nameFile1, $nameFile2)
 
     $outputString = diffArray($before, $after);
 
-    return $outputString . "\n";
+    return render($outputString);
 }

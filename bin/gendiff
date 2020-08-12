@@ -10,7 +10,6 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-
 use function Differ\Differ\diff\genDiff;
 
 $doc = <<<DOC
@@ -32,5 +31,7 @@ $args = Docopt::handle($doc, array('version'=>'Generate diff v0.01'));
 foreach ($args as $k=>$v)
 	echo $k.': '.json_encode($v).PHP_EOL;
 
+
 $diff = genDiff($args['<firstFile>'], $args['<secondFile>']);
 print_r($diff);
+
