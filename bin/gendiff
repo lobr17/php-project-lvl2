@@ -10,7 +10,12 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use function Differ\Differ\diff\genDiff;
+use function Differ\Differ\parsers\decoderJsonInPhp;
+use function Differ\Differ\parsers;
+use function Differ\Differ\diff\diffArray;
+use function Differ\Differ\Render\render;
+use function Differ\Differ\Render\converter;
+
 
 $doc = <<<DOC
 Generate diff
@@ -32,6 +37,15 @@ foreach ($args as $k=>$v)
 	echo $k.': '.json_encode($v).PHP_EOL;
 
 
-$diff = genDiff($args['<firstFile>'], $args['<secondFile>']);
-print_r($diff);
+[$array1, $array2] = decoderJsonInPhp($args['<firstFile>'], $args['<secondFile>']);
+
+$tree = diffArray($array1, $array2);
+
+$render = render($tree, 3);
+//print_r($render);
+
+$renderWithBrackets = converter($render);
+
+print_r($renderWithBrackets);
+
 
