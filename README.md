@@ -9,4 +9,5 @@
 
 
  Рекурсивное сравнение.
+ 
  https://asciinema.org/a/SlmbkHoUkOKjm2XLcnVwpf862
