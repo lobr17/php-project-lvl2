@@ -25,6 +25,7 @@
 	"src/diff.php",
 	"src/Render.php",
 	"src/parsers.php",
+	"formatters/Plain.php",
 	"./vendor/symfony/yaml/Yaml.php"
 	]
     },

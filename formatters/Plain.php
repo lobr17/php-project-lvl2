@@ -1,15 +1,19 @@
 <?php
 
-namespace Dif\Dif\Formatters\Plain;
+namespace Differ\Differ\formatters\Plain;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 function plain($array, $depth, $parent)
 {
-    // Убираю значения нод с типом unchanged
-    $filteredArray = array_filter($array, fn($node) => $node['type'] !== 'unchanged');
+     // Убираю значения нод с типом unchanged
+	$filteredArray = array_filter($array, function ($node) {
+		if ($node['type'] !== 'unchanged') {
+			return $node;
+		}
+	});
 
-    $result = array_map(function ($node) use ($depth, $array, $parent)  {
+	$result = array_map(function ($node) use ($depth, $array, $parent)  {
         if ($node['type'] === 'removed') {
             return "'" . $parent . $node['name'] . "'" . " was removed.";
 
@@ -18,7 +22,7 @@ function plain($array, $depth, $parent)
 
         // Разные значения (хоть строки, хоть объекты)
         } elseif ($node['type'] === 'changed') {
-            return $parent . $node['name'] .  "'" . " updated. From " . getFormattedValue($node['oldValue'], $depth) . " to " . getFormattedValue($node['newValue'], $depth ) ;
+            return "'" . $parent . $node['name'] .  "'" . " updated. From " . getFormattedValue($node['oldValue'], $depth) . " to " . getFormattedValue($node['newValue'], $depth ) ;
 
             // Одинаковые ключи, значения объекты
         } elseif ($node['type'] === 'nested') {
@@ -37,7 +41,7 @@ function plain($array, $depth, $parent)
             $acc .= implode($node);
             return $acc;
         }
-        $acc .=   "Property " . $node . nl2br(PHP_EOL);
+        $acc .=   "Property " . $node . "\n";
         return $acc;
     }, '');
     return $resultRender;

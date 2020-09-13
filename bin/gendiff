@@ -1,7 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-//require __DIR__.'/../vendor/autoload.php';
 $autoloadPath1 = __DIR__ . '/../../../autoload.php';
 $autoloadPath2 = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($autoloadPath1)) {
@@ -15,6 +14,7 @@ use function Differ\Differ\parsers;
 use function Differ\Differ\diff\diffArray;
 use function Differ\Differ\Render\render;
 use function Differ\Differ\Render\converter;
+use function Differ\Differ\formatters\Plain\plain;
 
 
 $doc = <<<DOC
@@ -33,19 +33,30 @@ DOC;
 
 $args = Docopt::handle($doc, array('version'=>'Generate diff v0.01'));
 
-foreach ($args as $k=>$v)
-	echo $k.': '.json_encode($v).PHP_EOL;
+// ----------------Start-------------------------------------------------
 
-
-[$array1, $array2] = decoderJsonInPhp($args['<firstFile>'], $args['<secondFile>']);
+/*[$array1, $array2] = decoderJsonInPhp($args['<firstFile>'], $args['<secondFile>']);
 
 $tree = diffArray($array1, $array2);
 
 $render = render($tree, 3);
-//print_r($render);
 
 $renderWithBrackets = converter($render);
 
-print_r($renderWithBrackets);
+print_r($renderWithBrackets);*/
 
 
+ 	function genDiff($path1, $path2, $format)
+	{
+		[$array1, $array2] = decoderJsonInPhp($path1, $path2);
+
+       		$tree = diffArray($array1, $array2);
+
+		if ($format === 'plain') {
+			$plain = plain($tree, 3, $parent = null);
+		return $plain;
+		}
+         }
+
+	$diffFormat = genDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']);
+	print_r($diffFormat);
