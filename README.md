@@ -10,4 +10,4 @@
 
  Рекурсивное сравнение.
  
- https://asciinema.org/a/SlmbkHoUkOKjm2XLcnVwpf862
+ https://asciinema.org/a/tK5iU3UqVaesdNDINl1I6i6in
