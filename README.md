@@ -13,7 +13,6 @@ https://asciinema.org/a/dO6ypyzYS6mir4gnCmfn8Etqx
 
 
  Рекурсивное сравнение.
- 
  https://asciinema.org/a/tK5iU3UqVaesdNDINl1I6i6in
  
  
