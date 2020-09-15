@@ -6,9 +6,8 @@
  */
 
 namespace Differ\Differ\parsers;
-use Symfony\Component\Yaml\Yaml;
 
-//require_once __DIR__ . "/../vendor/autoload.php";
+use Symfony\Component\Yaml\Yaml;
 
 
 function getPathToFile($nameFile1, $nameFile2)
@@ -38,8 +37,8 @@ function getFormatDecoder($pathToFile1, $pathToFile2)
 
 function decoderYamlInPhp($pathToFile1, $pathToFile2)
 {
-    $before = Yaml::parse(file_get_contents($pathToFile1), Yaml::PARSE_OBJECT_FOR_MAP);
-    $after = Yaml::parse(file_get_contents($pathToFile2), Yaml::PARSE_OBJECT_FOR_MAP);
+    $before = Yaml::parse(file_get_contents(__DIR__ . '/../workfiles/' . $pathToFile1));
+    $after = Yaml::parse(file_get_contents(__DIR__ . '/../workfiles/' . $pathToFile2));
 
     return [$before, $after];
 }

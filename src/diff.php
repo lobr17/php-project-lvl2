@@ -7,7 +7,6 @@
 
 namespace Differ\Differ\diff;
 
-//require_once __DIR__ . "/../vendor/autoload.php";
 
 function diffArray ($array1, $array2)
 {

@@ -9,7 +9,7 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use function Differ\Differ\parsers\decoderJsonInPhp;
+use function Differ\Differ\parsers\getFormatDecoder;
 use function Differ\Differ\parsers;
 use function Differ\Differ\diff\diffArray;
 use function Differ\Differ\Render\render;
@@ -33,30 +33,17 @@ DOC;
 
 $args = Docopt::handle($doc, array('version'=>'Generate diff v0.01'));
 
-// ----------------Start-------------------------------------------------
+ 
 
-/*[$array1, $array2] = decoderJsonInPhp($args['<firstFile>'], $args['<secondFile>']);
+[$array1, $array2] = getFormatDecoder($args['<firstFile>'], $args['<secondFile>']);
 
 $tree = diffArray($array1, $array2);
 
-$render = render($tree, 3);
 
-$renderWithBrackets = converter($render);
+if ($args['--format'] === 'pretty') {
+    print_r(converter(render($tree, 3)));
+} elseif ($args['--format'] === 'plain') {
+    print_r(plain($tree, 3, $parent = null));
+}
 
-print_r($renderWithBrackets);*/
 
-
- 	function genDiff($path1, $path2, $format)
-	{
-		[$array1, $array2] = decoderJsonInPhp($path1, $path2);
-
-       		$tree = diffArray($array1, $array2);
-
-		if ($format === 'plain') {
-			$plain = plain($tree, 3, $parent = null);
-		return $plain;
-		}
-         }
-
-	$diffFormat = genDiff($args['<firstFile>'], $args['<secondFile>'], $args['--format']);
-	print_r($diffFormat);
