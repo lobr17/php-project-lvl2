@@ -4,3 +4,4 @@ build
 logs
 *.cache
 temporary
+*swo

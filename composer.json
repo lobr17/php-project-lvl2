@@ -22,9 +22,9 @@
     },
     "autoload": {	
     	"files": [
-	"src/diff.php",
-	"src/Render.php",
-	"src/parsers.php",
+	"src/Diff.php",
+	"src/Parsers.php",
+	"formatters/Render.php",
 	"formatters/Plain.php",
 	"./vendor/symfony/yaml/Yaml.php"
 	]

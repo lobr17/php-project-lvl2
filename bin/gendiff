@@ -9,12 +9,9 @@ if (file_exists($autoloadPath1)) {
     require_once $autoloadPath2;
 }
 
-use function Differ\Differ\parsers\getFormatDecoder;
-use function Differ\Differ\parsers;
-use function Differ\Differ\diff\diffArray;
-use function Differ\Differ\Render\render;
-use function Differ\Differ\Render\converter;
-use function Differ\Differ\formatters\Plain\plain;
+
+use function Differ\Differ\Parsers\changedFormat;
+use function Differ\Differ\Parsers\creatureTree;
 
 
 $doc = <<<DOC
@@ -33,17 +30,10 @@ DOC;
 
 $args = Docopt::handle($doc, array('version'=>'Generate diff v0.01'));
 
- 
 
-[$array1, $array2] = getFormatDecoder($args['<firstFile>'], $args['<secondFile>']);
-
-$tree = diffArray($array1, $array2);
+changedFormat($args);
 
 
-if ($args['--format'] === 'pretty') {
-    print_r(converter(render($tree, 3)));
-} elseif ($args['--format'] === 'plain') {
-    print_r(plain($tree, 3, $parent = null));
-}
+
 
 
