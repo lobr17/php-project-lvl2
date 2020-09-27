@@ -33,6 +33,8 @@ function getFormattedDiff($array, $depth)
         }
     }, $array);
 
+print_r($result);
+
     // Конечный массив переводим в строку.
     $resultRender = array_reduce($result, function ($acc, $node) use ($depth) {
         if (is_array($node)) {
