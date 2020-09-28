@@ -18,23 +18,24 @@ function getFormattedDiff($array, $depth)
 
         } elseif ($node['type'] === 'add') {
             return  str_repeat(' ', $depth) . "+ {$node['name']}: " . getFormattedValue($node['value'], $depth);
+
         // Одинаковые значения
         } elseif ($node['type'] === 'unchanged') {
-            return str_repeat(' ', $depth + 1) ." {$node['name']}: " . getFormattedValue($node['value'], $depth);
+            return str_repeat(' ', $depth) ." {$node['name']}: " . getFormattedValue($node['value'], $depth);
 
         // Разные значения (хоть строки, хоть объекты)
         } elseif ($node['type'] === 'changed') {
                 return str_repeat(' ', $depth) . "- {$node['name']}: " .   getFormattedValue($node['oldValue'], $depth) . "\n" . str_repeat(' ', $depth)  . "+ {$node['name']}: " . getFormattedValue($node['newValue'], $depth ) ;
 
-        // Одинаковые ключи, значения объект
-	} elseif ($node['type'] === 'nested') {
-            return str_repeat(' ', $depth) . " {$node['name']}: { \n" . getFormattedDiff($node['children'][$node['name']], $depth + 3) . str_repeat(' ', $depth )  . "}";
+        // Одинаковые ключи, значения объекты
+        } elseif ($node['type'] === 'nested') {
+            return str_repeat(' ', $depth) . " {$node['name']}: { \n" . getFormattedDiff($node['children'][$node['name']], $depth) . "}";
         }
     }, $array);
 
 //print_r($result);
 
-    // Полученный массив переводим в строку
+    // Конечный массив переводим в строку.
     $resultRender = array_reduce($result, function ($acc, $node) use ($depth) {
         if (is_array($node)) {
             $acc .=  implode($node) . "\n";
@@ -44,17 +45,14 @@ function getFormattedDiff($array, $depth)
         $acc .= $node . "\n";
         return $acc;
     }, '');
-    
-//    print_r($resultRender);
+
         return $resultRender;
     
 }
 
 // Получаем значение Value и ноды (копаем вглубь)
 function getFormattedValue($subArray, $depth) {
-       
     // Проверка значения булева
-
     if (!is_array($subArray)) {
         if (is_bool($subArray)) {
             if ($subArray === true) {
@@ -66,11 +64,7 @@ function getFormattedValue($subArray, $depth) {
         return $subArray;
     }
 
-
-//is_bool($subArray) and $subArray === true) ? return 'true' : return 'false' ;
-
-    //----------------!!!!!!!!!!!!!!-------------------
-    $newDepth = $depth + 5;
+    $newDepth = $depth + 3;
 
     $result = array_map(function ($key) use ($subArray, $newDepth) {
         $tab = str_repeat(' ', $newDepth);
@@ -81,9 +75,23 @@ function getFormattedValue($subArray, $depth) {
     return "{\n"  . implode("\n", $result) . "\n"  . str_repeat(' ', $newDepth) . "}"  ;
 }
 
-
-function addOuterBreckets($withoutArray)
+// Наружные скобки
+function converter($withoutArray)
 {
     return "{\n" . $withoutArray . "}\n";
+   
+
+    //Массив переводим в строку.
+    $resultRender = array_reduce($result, function ($acc, $child) {
+            if (is_array($child)) {
+                $acc .= implode(array_keys($child)) . ' {' . "\n" . implode($child) . '}' . "\n";
+                return $acc;
+            }
+            $acc .= $child . "\n";
+            return $acc;
+    }, '');
+
+    return $resultRender;
+
 }
 

@@ -34,7 +34,7 @@ function getFormattedDiff($array, $depth)
 
 //print_r($result);
 
-    // Полученный массив переводим в строку
+    // Конечный массив переводим в строку.
     $resultRender = array_reduce($result, function ($acc, $node) use ($depth) {
         if (is_array($node)) {
             $acc .=  implode($node) . "\n";
@@ -44,17 +44,14 @@ function getFormattedDiff($array, $depth)
         $acc .= $node . "\n";
         return $acc;
     }, '');
-    
-//    print_r($resultRender);
+
         return $resultRender;
     
 }
 
 // Получаем значение Value и ноды (копаем вглубь)
 function getFormattedValue($subArray, $depth) {
-       
     // Проверка значения булева
-
     if (!is_array($subArray)) {
         if (is_bool($subArray)) {
             if ($subArray === true) {
@@ -65,9 +62,6 @@ function getFormattedValue($subArray, $depth) {
 
         return $subArray;
     }
-
-
-//is_bool($subArray) and $subArray === true) ? return 'true' : return 'false' ;
 
     //----------------!!!!!!!!!!!!!!-------------------
     $newDepth = $depth + 5;
@@ -81,9 +75,23 @@ function getFormattedValue($subArray, $depth) {
     return "{\n"  . implode("\n", $result) . "\n"  . str_repeat(' ', $newDepth) . "}"  ;
 }
 
-
-function addOuterBreckets($withoutArray)
+// Наружные скобки
+function converter($withoutArray)
 {
     return "{\n" . $withoutArray . "}\n";
+   
+
+    //Массив переводим в строку.
+    $resultRender = array_reduce($result, function ($acc, $child) {
+            if (is_array($child)) {
+                $acc .= implode(array_keys($child)) . ' {' . "\n" . implode($child) . '}' . "\n";
+                return $acc;
+            }
+            $acc .= $child . "\n";
+            return $acc;
+    }, '');
+
+    return $resultRender;
+
 }
 
