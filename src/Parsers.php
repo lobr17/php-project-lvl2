@@ -8,15 +8,15 @@
 namespace Differ\Differ\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
+
 use function Differ\Differ\Diff\getDiff;
 use function Differ\Differ\Render\addOuterBreckets;
 use function Differ\Differ\Render\getFormattedDiff;
 use function Differ\Differ\formatters\Plain\plain;
 
-
 function getExpansion($file)
 {
-	$expansion = pathinfo($file, PATHINFO_EXTENSION);
+    $expansion = pathinfo($file, PATHINFO_EXTENSION);
         return $expansion;
 }
 
@@ -27,11 +27,10 @@ function getArrayForTree($file)
     if ($expansion === 'json') {
             $workFile = json_decode(file_get_contents($file), true);
             return $workFile;
-    } elseif($expansion === 'yml') {
+    } elseif ($expansion === 'yml') {
             $workFile = Yaml::parse(file_get_contents($file));
             return $workFile;
     }
-
 }
 
 function creatureTree($args)
@@ -46,19 +45,17 @@ function creatureTree($args)
 
 function getFormat($format, $tree)
 {
-        if ($format === 'pretty') {
-            $recursion = getFormattedDiff($tree, 3);
-            return addOuterBreckets($recursion);
-        } elseif ($format === 'plain') {
-            return plain($tree, 3, $parent = null);
-        }
+    if ($format === 'pretty') {
+        $recursion = getFormattedDiff($tree);
+        return addOuterBreckets($recursion);
+    } elseif ($format === 'plain') {
+        return plain($tree, 3, $parent = null);
+    }
 }
 
 function changedFormat($args)
 {
         $tree = creatureTree($args);
         $result = getFormat($args['--format'], $tree);
-        print_r($result);
-
+//        print_r($result);
 }
-

@@ -7,7 +7,10 @@
 
 namespace Differ\Differ\Render;
 
-function getFormattedDiff($array, $depth)
+
+//use Illuminate\Support\Collection;
+
+function iter($array, $depth)
 {
 //	print_r($array);
 
@@ -28,11 +31,16 @@ function getFormattedDiff($array, $depth)
 
         // Одинаковые ключи, значения объект
 	} elseif ($node['type'] === 'nested') {
-            return str_repeat(' ', $depth) . " {$node['name']}: { \n" . getFormattedDiff($node['children'][$node['name']], $depth + 3) . str_repeat(' ', $depth )  . "}";
+            return str_repeat(' ', $depth) . " {$node['name']}: { \n" . iter($node['children'][$node['name']], $depth + 3) . str_repeat(' ', $depth )  . "}";
         }
     }, $array);
 
-//print_r($result);
+    $collection = collect($result);
+    $flattened = $collection->flatten();
+    $flattened->all();
+
+print_r($flattened);
+   
 
     // Полученный массив переводим в строку
     $resultRender = array_reduce($result, function ($acc, $node) use ($depth) {
@@ -45,16 +53,22 @@ function getFormattedDiff($array, $depth)
         return $acc;
     }, '');
     
-//    print_r($resultRender);
+
         return $resultRender;
     
 }
+
+function getFormattedDiff($array) {
+    return iter($array, 3);
+}
+
 
 // Получаем значение Value и ноды (копаем вглубь)
 function getFormattedValue($subArray, $depth) {
        
     // Проверка значения булева
 
+// Тернарный с return не отрабатывает. Не получается выправить   
     if (!is_array($subArray)) {
         if (is_bool($subArray)) {
             if ($subArray === true) {
@@ -65,9 +79,6 @@ function getFormattedValue($subArray, $depth) {
 
         return $subArray;
     }
-
-
-//is_bool($subArray) and $subArray === true) ? return 'true' : return 'false' ;
 
     //----------------!!!!!!!!!!!!!!-------------------
     $newDepth = $depth + 5;

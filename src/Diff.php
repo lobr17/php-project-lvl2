@@ -7,7 +7,6 @@
 
 namespace Differ\Differ\Diff;
 
-
 function getDiff($array1, $array2)
 {
     $keys1 = array_keys($array1);
@@ -26,14 +25,12 @@ function getDiff($array1, $array2)
             return ['name' => $key, 'type' => 'add', 'value' => $array2[$key]];
 
         // Одинаковые ключи. Значения объекты.
-        } elseif (is_array($array1[$key]) and is_array($array2[$key])) { 
-        	return ['name' => $key, 'type' => 'nested', 'children' => [$key => getDiff($array1[$key], $array2[$key])]];
-	
-	} elseif ($array1[$key] === $array2[$key]) {
-		return ['name' => $key, 'type' => 'unchanged', 'value' => $array1[$key]];
-
-      	} else { 
-	    return ['name' => $key, 'type' => 'changed', 'oldValue' => $array1[$key], 'newValue' =>$array2[$key]];
+        } elseif (is_array($array1[$key]) and is_array($array2[$key])) {
+            return ['name' => $key, 'type' => 'nested', 'children' => [$key => getDiff($array1[$key], $array2[$key])]];
+        } elseif ($array1[$key] === $array2[$key]) {
+            return ['name' => $key, 'type' => 'unchanged', 'value' => $array1[$key]];
+        } else {
+            return ['name' => $key, 'type' => 'changed', 'oldValue' => $array1[$key], 'newValue' => $array2[$key]];
         }
     }, $arrayKeys);
     // print_r(nl2br(PHP_EOL));
