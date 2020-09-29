@@ -57,5 +57,5 @@ function changedFormat($args)
 {
         $tree = creatureTree($args);
         $result = getFormat($args['--format'], $tree);
-//        print_r($result);
+        print_r($result);
 }

@@ -35,12 +35,12 @@ function iter($array, $depth)
         }
     }, $array);
 
-    $collection = collect($result);
+/*    $collection = collect($result);
     $flattened = $collection->flatten();
     $flattened->all();
 
 print_r($flattened);
-   
+ */ 
 
     // Полученный массив переводим в строку
     $resultRender = array_reduce($result, function ($acc, $node) use ($depth) {
