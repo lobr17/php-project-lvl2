@@ -4,9 +4,6 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 
-//use function Differ\Differ\diff\genDiff;
-
-
 use function Differ\Differ\Parsers\getArrayForTree;
 use function Differ\Differ\Diff\getDiff;
 use function Differ\Differ\Render\addOuterBreckets;
