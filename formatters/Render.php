@@ -42,43 +42,27 @@ function getFormattedDiff($array) {
 
 
 // Получаем значение Value и ноды (копаем вглубь)
-function getFormattedValue($subArray, $depth) {
+function getFormattedValue($value, $depth) {
        
     // Проверка значения булева  
-
-   if (!is_array($subArray)) {
-        if (is_bool($subArray)) {
-            if ($subArray === true) {
-                return 'true';
-            }
-            return 'false';
-        }
-
-        return $subArray;
-    }
-
-
-// Не пашет
-/*	if (is_bool($subArray)) {
-	    if ($subArray === true) {
-	        return 'true';
-	    }
-	    return 'false';
+	
+	if (is_bool($value)) {
+	        return $value ? 'true' : 'false';
+	} 
+	
+	if (!is_array($value)) {
+	    return $value;
 	}
-
-	if (is_array($subArray)) {
-	    return $subArray;
-	}
- */	
+	
  
 
     $newDepth = $depth + 2;
 
-    $result = array_map(function ($key) use ($subArray, $newDepth) {
+    $result = array_map(function ($key) use ($value, $newDepth) {
         $tab = str_repeat(' ', $newDepth);
-        $formattedValue = getFormattedValue($subArray[$key], $newDepth);
+        $formattedValue = getFormattedValue($value[$key], $newDepth);
         return str_repeat(' ', $newDepth) . "{$tab}{$key}:  {$formattedValue} "  ;
-    }, array_keys($subArray));
+    }, array_keys($value));
 
     return "{\n"  . implode("\n", $result) . "\n"  . str_repeat(' ', $newDepth) . "}"  ;
 }
@@ -88,4 +72,3 @@ function addOuterBreckets($withoutArray)
 {
     return "{\n" . $withoutArray . "}\n";
 }
-

@@ -17,11 +17,10 @@ use function Differ\Differ\formatters\Plain\plain;
 class DiffTest1 extends TestCase
 {
     public function testDiff()
-    {
-        
+    {   
 
-        $array1 = json_decode(__DIR__ . '/fixtures/before.json');
-        $array2 = json_decode(__DIR__ . '/fixtures/after.json');
+        $array1 = json_decode(file_get_contents(__DIR__ . '/fixtures/before.json'), true);
+        $array2 = json_decode(file_get_contents(__DIR__ . '/fixtures/after.json'), true);
 
 	$tree = getDiff($array1, $array2);
 
