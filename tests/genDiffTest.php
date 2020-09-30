@@ -20,8 +20,8 @@ class DiffTest1 extends TestCase
     {
         
 
-        $array1 = json_decode('/fixtures/before.json');
-        $array2 = json_decode('/fixtures/after.json');
+        $array1 = json_decode('/home/yason/hexlet/php-project-lvl2/workfiles/before.json');
+        $array2 = json_decode('/home/yason/hexlet/php-project-lvl2/workfiles/after.json');
 
 	$tree = getDiff($array1, $array2);
 
