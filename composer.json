@@ -13,7 +13,8 @@
     ],
     "require": {
         "docopt/docopt": "^1.0",
-        "tightenco/collect": "^8.0"
+        "tightenco/collect": "^8.0",
+        "funct/funct": "^1.5"
     },
     "scripts": {
         "phpcs": "phpcs",
@@ -25,6 +26,7 @@
     	"files": [
 	"src/Diff.php",
 	"src/Parsers.php",
+	"src/Differ.php",
 	"formatters/Render.php",
 	"formatters/Plain.php",
 	"./vendor/symfony/yaml/Yaml.php"
