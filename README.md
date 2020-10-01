@@ -4,7 +4,7 @@ Create folder .composer in /home/$name/
 
 [![Build Status](https://travis-ci.org/lobr17/php-project-lvl2.svg?branch=master)](https://travis-ci.org/lobr17/php-project-lvl2)
 
-![CI](https://github.com/lobr17/php-project-lvl2/workflows/CI/badge.svg)
+https://github.com/lobr17/php-project-lvl2/workflows/CI/badge.svg
 
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/3a5a41d6543119ed677f/maintainability)](https://codeclimate.com/github/lobr17/php-project-lvl2/maintainability)
