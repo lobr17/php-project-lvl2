@@ -3,28 +3,26 @@
 namespace Tests;
 
 use PHPUnit\Framework\TestCase;
-
 use function Differ\Differ\Parsers\getArrayForTree;
 use function Differ\Differ\Diff\getDiff;
 use function Differ\Differ\Render\addOuterBreckets;
 use function Differ\Differ\Render\getFormattedDiff;
 use function Differ\Differ\formatters\Plain\plain;
 
-
 class DiffTest1 extends TestCase
 {
     public function testDiff()
     {   
 
-        $array1 = json_decode(file_get_contents(__DIR__ . '/fixtures/before.json'), true);
-        $array2 = json_decode(file_get_contents(__DIR__ . '/fixtures/after.json'), true);
+    $array1 = json_decode(file_get_contents(__DIR__ . '/fixtures/before.json'), true);
+    $array2 = json_decode(file_get_contents(__DIR__ . '/fixtures/after.json'), true);
 
-	$tree = getDiff($array1, $array2);
+    $tree = getDiff($array1, $array2);
 
-	$recursion = getFormattedDiff($tree);
-        $actual = addOuterBreckets($recursion);	
+    $recursion = getFormattedDiff($tree);
+    $actual = addOuterBreckets($recursion);	
 
-        $expected = <<<DOC
+    $expected = <<<DOC
 {
     common: { 
       + follow: false
