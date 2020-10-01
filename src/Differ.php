@@ -8,7 +8,6 @@ use function Differ\Differ\Render\addOuterBreckets;
 use function Differ\Differ\Render\getFormattedDiff;
 use function Differ\Differ\formatters\Plain\plain;
 
-
 function creatureTree($args)
 {
         $array1 = getArrayForTree($args['<firstFile>']);
@@ -36,4 +35,3 @@ function changedFormat($args)
         $result = getFormat($args['--format'], $tree);
         print_r($result);
 }
-
