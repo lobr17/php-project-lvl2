@@ -13,7 +13,7 @@ function getDiff($array1, $array2)
     $arrayKeys = array_unique(array_merge($keys1, $keys2));
     asort($arrayKeys);
     
-    $result = array_map (function ($key) use ($array1, $array2, $keys1, $keys2){
+    $result = array_map (function($key) use ($array1, $array2, $keys1, $keys2) {
         // Удалённый, ключ есть только в before
         if (!in_array($key, $keys2)) {
             return ['name' => $key, 'type' => 'removed', 'value' => $array1[$key]];
