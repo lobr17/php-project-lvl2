@@ -6,6 +6,7 @@ use function Differ\Differ\Parsers\getArrayForTree;
 use function Differ\Differ\Diff\getDiff;
 use function Differ\Differ\Render\addOuterBreckets;
 use function Differ\Differ\Render\getFormattedDiff;
+
 use function Differ\Differ\formatters\Plain\plain;
 
 function creatureTree($args)

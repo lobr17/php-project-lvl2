@@ -5,7 +5,6 @@
  */
 
 namespace Differ\Differ\Parsers;
-
 use Symfony\Component\Yaml\Yaml;
 
 function getExpansion($file)
