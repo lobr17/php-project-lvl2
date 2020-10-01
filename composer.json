@@ -14,8 +14,7 @@
     "require": {
         "docopt/docopt": "^1.0",
         "tightenco/collect": "^8.0",
-        "funct/funct": "^1.5",
-        "phpunit/phpunit": "^8.5"
+        "funct/funct": "^1.5"
     },
     "scripts": {
         "phpcs": "phpcs",
@@ -35,6 +34,7 @@
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "*",
-        "codeclimate/php-test-reporter": "^0.4.4"
+        "codeclimate/php-test-reporter": "^0.4.4",
+        "phpunit/phpunit": "^8.5"
     }
 }
