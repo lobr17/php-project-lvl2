@@ -31,6 +31,7 @@ function iter($array, $depth)
         }
     }, $array);
 
+    print_r($result);
 
     $resultString = implode("\n", $result) . "\n";
     return $resultString;
