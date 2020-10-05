@@ -9,6 +9,7 @@ use function Differ\Differ\Diff\getDiff;
 use function Differ\Differ\Render\addOuterBreckets;
 use function Differ\Differ\Render\getFormattedDiff;
 use function Differ\Differ\formatters\Plain\plain;
+use function Differ\Differ\Differ\getFormatRequest;
 
 class DiffTest1 extends TestCase
 {
@@ -19,8 +20,7 @@ class DiffTest1 extends TestCase
 
         $tree = getDiff($array1, $array2);
 
-        $recursion = getFormattedDiff($tree);
-        $actual = addOuterBreckets($recursion);
+        $actual = getFormatRequest('pretty', $tree);
 
         $expected = <<<DOC
 {
