@@ -9,7 +9,6 @@ use function Differ\Differ\Render\addOuterBreckets;
 use function Differ\Differ\Render\getFormattedDiff;
 use function Differ\Differ\Plain\plain;
 
-
 function getFormatRequest($formatRequest, $tree)
 {
     if ($formatRequest === 'pretty') {
@@ -27,8 +26,7 @@ function comparison($firstFile, $secondFile, $formatRequest)
         $fileFormat2 = getFormatFile($secondFile);
         $array2 = parses($secondFile, $fileFormat2);
 
-	$tree = getDiff($array1, $array2);
+    $tree = getDiff($array1, $array2);
 
         return getFormatRequest($formatRequest, $tree);
 }
-

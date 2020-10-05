@@ -24,7 +24,7 @@ function getDiff($array1, $array2)
 
             // Одинаковые ключи. Значения объекты.
         } elseif (is_array($array1[$key]) and is_array($array2[$key])) {
-            return ['name' => $key, 'type' => 'nested', 'children' => [$key => getDiff($array1[$key], $array2[$key])]];
+            return ['name' => $key, 'type' => 'nested', 'children' => getDiff($array1[$key], $array2[$key])];
         } elseif ($array1[$key] === $array2[$key]) {
             return ['name' => $key, 'type' => 'unchanged', 'value' => $array1[$key]];
         } else {
