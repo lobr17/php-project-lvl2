@@ -19,13 +19,10 @@ function iter($array, $depth)
             return  str_repeat(' ', $depth) . "+ {$node['name']}: " . getFormattedValue($node['value'], $depth);
         } elseif ($node['type'] === 'unchanged') {
             return str_repeat(' ', $depth + 1) . " {$node['name']}: " . getFormattedValue($node['value'], $depth);
-	} elseif ($node['type'] === 'changed') {
-		$minus = "${tub}- ${node['name']}: " . getFormattedValue($node['oldValue'], $depth) . "\n"; 
-                $plus = "${tub}" . "+ {$node['name']}: " . getFormattedValue($node['newValue'], $depth);
-
-                return $minus . $plus;
-
-               // return "${tub}- ${node['name']}: " . getFormattedValue($node['oldValue'], $depth) . "\n" . "${tub}" . "+ {$node['name']}: " . getFormattedValue($node['newValue'], $depth);
+        } elseif ($node['type'] === 'changed') {
+            $removed = "${tub}- ${node['name']}: " . getFormattedValue($node['oldValue'], $depth) . "\n";
+            $add = "${tub}" . "+ {$node['name']}: " . getFormattedValue($node['newValue'], $depth);
+            return $removed . $add;
         } elseif ($node['type'] === 'nested') {
             return "${tub} {$node['name']}: { \n" . iter($node['children'], $depth + 3) . "${tub}}";
         }
