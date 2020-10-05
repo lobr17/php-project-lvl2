@@ -16,10 +16,9 @@ function plain($array, $depth, $parent)
         } elseif ($node['type'] === 'add') {
             return "${sFullPath} was added with value: " . getFormattedValue($node['value'], $depth) . "\n";
         } elseif ($node['type'] === 'changed') {
-            //return "${sFullPath} updated. From " . getFormattedValue($node['oldValue'], $depth) . " to " . getFormattedValue($node['newValue'], $depth) . "\n";
             $oldValue = "${sFullPath} updated. From " . getFormattedValue($node['oldValue'], $depth);
             $newValue = getFormattedValue($node['newValue'], $depth) . "\n";
-            return $oldValue . $newValue;
+	    return $oldValue . $newValue;
         } elseif ($node['type'] === 'nested') {
             return plain($node['children'], $depth + 5, $parent . $node['name'] . ".");
         }
