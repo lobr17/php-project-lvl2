@@ -10,7 +10,9 @@ use function Funct\Collection\flattenAll;
 
 function iter($array, $depth)
 {
-    $result = array_map(function ($node) use ($depth) {
+    $tub = str_repeat(' ', $depth);
+
+    $result = array_map(function ($node) use ($depth, $tub) {
         if ($node['type'] === 'removed') {
             return  str_repeat(' ', $depth) . "- {$node['name']}: " . getFormattedValue($node['value'], $depth);
         } elseif ($node['type'] === 'add') {
@@ -18,10 +20,9 @@ function iter($array, $depth)
         } elseif ($node['type'] === 'unchanged') {
             return str_repeat(' ', $depth + 1) . " {$node['name']}: " . getFormattedValue($node['value'], $depth);
         } elseif ($node['type'] === 'changed') {
-                return str_repeat(' ', $depth) . "- {$node['name']}: " .   getFormattedValue($node['oldValue'], $depth) . "\n" . str_repeat(' ', $depth)  . "+ {$node['name']}: " . getFormattedValue($node['newValue'], $depth);
+                return "${tub}- ${node['name']}: " . getFormattedValue($node['oldValue'], $depth) . "\n" . "${tub}" . "+ {$node['name']}: " . getFormattedValue($node['newValue'], $depth);
         } elseif ($node['type'] === 'nested') {
-           // return str_repeat(' ', $depth) . " {$node['name']}: { \n" . iter($node['children'][$node['name']], $depth + 3).str_repeat(' ', $depth )  . "}";
-            return str_repeat(' ', $depth) . " {$node['name']}: { \n" . iter($node['children'], $depth + 3) . str_repeat(' ', $depth)  . "}";
+            return "${tub} {$node['name']}: { \n" . iter($node['children'], $depth + 3) . "${tub}}";
         }
     }, $array);
 
