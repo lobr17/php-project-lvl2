@@ -8,21 +8,16 @@ namespace Differ\Differ\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
 
-function getExpansion($file)
+function getFormatFile($fileName)
 {
-    $expansion = pathinfo($file, PATHINFO_EXTENSION);
-        return $expansion;
+    return pathinfo($fileName, PATHINFO_EXTENSION);
 }
 
-function getArrayForTree($file)
+function parses($fileName, $fileFormat)
 {
-    $expansion = getExpansion($file);
-
-    if ($expansion === 'json') {
-            $workFile = json_decode(file_get_contents($file), true);
-            return $workFile;
-    } elseif ($expansion === 'yml') {
-            $workFile = Yaml::parse(file_get_contents($file));
-            return $workFile;
+    if ($fileFormat === 'json') {
+            return json_decode(file_get_contents($fileName), true);
+    } elseif ($fileFormat === 'yml') {
+            return Yaml::parse(file_get_contents($fileName));
     }
 }

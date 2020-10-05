@@ -2,35 +2,33 @@
 
 namespace Differ\Differ\Differ;
 
-use function Differ\Differ\Parsers\getArrayForTree;
+use function Differ\Differ\Parsers\parses;
+use function Differ\Differ\Parsers\getFormatFile;
 use function Differ\Differ\Diff\getDiff;
 use function Differ\Differ\Render\addOuterBreckets;
 use function Differ\Differ\Render\getFormattedDiff;
-use function Differ\Differ\formatters\Plain\plain;
+use function Differ\Differ\Plain\plain;
 
-function creatureTree($args)
+
+function getFormatRequest($formatRequest, $tree)
 {
-        $array1 = getArrayForTree($args['<firstFile>']);
-        $array2 = getArrayForTree($args['<secondFile>']);
-
-        $tree = getDiff($array1, $array2);
-
-        return $tree;
-}
-
-function getFormat($format, $tree)
-{
-    if ($format === 'pretty') {
-        $recursion = getFormattedDiff($tree);
-        return addOuterBreckets($recursion);
-    } elseif ($format === 'plain') {
+    if ($formatRequest === 'pretty') {
+        return getFormattedDiff($tree);
+    } elseif ($formatRequest === 'plain') {
         return plain($tree, 3, $parent = null);
     }
 }
 
-function changedFormat($args)
+function comparison($firstFile, $secondFile, $formatRequest)
 {
-        $tree = creatureTree($args);
-        $result = getFormat($args['--format'], $tree);
-        print_r($result);
+        $fileFormat1 = getFormatFile($firstFile);
+        $array1 = parses($firstFile, $fileFormat1);
+
+        $fileFormat2 = getFormatFile($secondFile);
+        $array2 = parses($secondFile, $fileFormat2);
+
+	$tree = getDiff($array1, $array2);
+
+        return getFormatRequest($formatRequest, $tree);
 }
+

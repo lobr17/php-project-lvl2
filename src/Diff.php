@@ -10,16 +10,16 @@ function getDiff($array1, $array2)
 {
     $keys1 = array_keys($array1);
     $keys2 = array_keys($array2);
-    $arrayKeys = array_unique(array_merge($keys1, $keys2));
-    asort($arrayKeys);
+    $keys = array_unique(array_merge($keys1, $keys2));
+    asort($keys);
     
-    $result = array_map(function ($key) use ($array1, $array2, $keys1, $keys2) {
+    $result = array_map(function ($key) use ($array1, $array2) {
         // Удалённый, ключ есть только в before
-        if (!in_array($key, $keys2)) {
+        if (!array_key_exists($key, $array2)) {
             return ['name' => $key, 'type' => 'removed', 'value' => $array1[$key]];
 
             // Добавленный, ключ есть только в after
-        } elseif (!in_array($key, $keys1)) {
+        } elseif (!array_key_exists($key, $array1)) {
             return ['name' => $key, 'type' => 'add', 'value' => $array2[$key]];
 
             // Одинаковые ключи. Значения объекты.
@@ -30,7 +30,7 @@ function getDiff($array1, $array2)
         } else {
             return ['name' => $key, 'type' => 'changed', 'oldValue' => $array1[$key], 'newValue' => $array2[$key]];
         }
-    }, $arrayKeys);
+    }, $keys);
     
     return $result;
 }

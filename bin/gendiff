@@ -10,9 +10,7 @@ if (file_exists($autoloadPath1)) {
 }
 
 
-use function Differ\Differ\Differ\changedFormat;
-use function Differ\Differ\Parsers\creatureTree;
-
+use function Differ\Differ\Differ\comparison;
 
 $doc = <<<DOC
 Generate diff
@@ -31,9 +29,4 @@ DOC;
 $args = Docopt::handle($doc, array('version'=>'Generate diff v0.01'));
 
 
-changedFormat($args);
-
-
-
-
-
+print_r(comparison($args['<firstFile>'], $args['<secondFile>'], $args['--format']));

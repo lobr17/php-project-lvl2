@@ -27,8 +27,8 @@
 	"src/Diff.php",
 	"src/Parsers.php",
 	"src/Differ.php",
-	"formatters/Render.php",
-	"formatters/Plain.php",
+	"src/Render.php",
+	"src/Plain.php",
 	"./vendor/symfony/yaml/Yaml.php"
 	]
     },
