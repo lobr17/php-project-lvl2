@@ -4,7 +4,7 @@
  * Преобразование полученного массива в читаемый вид.
  */
 
-namespace Differ\Differ\Render;
+namespace Differ\Differ\Pretty;
 
 use function Funct\Collection\flattenAll;
 
@@ -35,6 +35,7 @@ function iter($array, $depth)
 function getFormattedDiff($array)
 {
     return "{\n" . iter($array, 3) . "}\n";
+   //   return iter($array, 3);	    
 }
 
 

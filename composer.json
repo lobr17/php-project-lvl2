@@ -27,7 +27,7 @@
 	"src/Diff.php",
 	"src/Parsers.php",
 	"src/Differ.php",
-	"src/Render.php",
+	"src/Pretty.php",
 	"src/Plain.php",
 	"./vendor/symfony/yaml/Yaml.php"
 	]

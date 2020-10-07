@@ -13,7 +13,7 @@ function getFormatFile($fileName)
     return pathinfo($fileName, PATHINFO_EXTENSION);
 }
 
-function parses($fileName, $fileFormat)
+function parse($fileName, $fileFormat)
 {
     if ($fileFormat === 'json') {
             return json_decode(file_get_contents($fileName), true);
