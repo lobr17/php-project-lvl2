@@ -13,17 +13,15 @@ use Exception;
 
 function getFormatRequest($formatRequest, $tree)
 {
-    try {    
+      
 	if ($formatRequest === 'pretty') {
             return getFormattedDiff($tree);
         } elseif ($formatRequest === 'plain') {
-//            return plain($tree, 3, $parent = null);
               return plain($tree);  
 	}
+
 	throw new \Exception("Not correct format. \n");
-    } catch (Exception $e) {
-        echo "Error: {$e->getMessage()}";
-    }
+    
 }
 
 function comparison($firstFile, $secondFile, $formatRequest = 'pretty')
