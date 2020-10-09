@@ -11,7 +11,8 @@ use function Funct\Collection\flattenAll;
 function iter($array, $depth)
 {
     $tab = str_repeat(' ', $depth);
-   
+    $newTab = str_repeat(' ', $depth - 3);  
+
     $result = array_map(function ($node) use ($depth, $tab) {
     
         switch ($node['type']) {
@@ -34,13 +35,13 @@ function iter($array, $depth)
                 break;
 
 	    case 'nested':
-                return "${tab} {$node['name']}: " . iter($node['children'], $depth + 4) . "\n${tab}}";
+                return "${tab} {$node['name']}: " . iter($node['children'], $depth + 4);
                 break;
 	}
     }, $array);
 
     $resultString = implode("\n", $result);
-    return "{\n" . $resultString;
+    return "{\n" . $resultString . "\n${newTab}}";
 
 }
 
