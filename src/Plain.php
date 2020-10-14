@@ -4,7 +4,6 @@ namespace Differ\Differ\Plain;
 
 use function Funct\Collection\flattenAll;
 use function Funct\Collection\compact;
-
 use Exception;
 
 function iter($array, $depth, $parent)
