@@ -2,12 +2,12 @@
 
 namespace Differ\Differ\Differ;
 
+use Exception;
 use function Differ\Differ\Parsers\parse;
 use function Differ\Differ\Diff\getDiff;
 use function Differ\Differ\Pretty\addOuterBreckets;
 use function Differ\Differ\Pretty\getFormattedDiff;
 use function Differ\Differ\Plain\plain;
-use Exception;
 
 function getFormatFile($fileName)
 {
