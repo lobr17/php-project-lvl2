@@ -10,44 +10,53 @@ use function Funct\Collection\flattenAll;
 
 function iter($array, $depth)
 {
-    $tab = str_repeat(' ', $depth);
-    $newTab = str_repeat(' ', $depth - 3);  
+    $tab = creatTab($depth);
+    $closableTab = creatTab($depth - 2);  
 
     $result = array_map(function ($node) use ($depth, $tab) {
-    
         switch ($node['type']) {
-            case 'removed':	  
-	        return "${tab}- {$node['name']}: " . getFormattedValue($node['value'], $depth);
+	case 'removed':	  
+		$formattedValue = getFormattedValue($node['value'], $depth);
+	        return "${tab}- {$node['name']}: $formattedValue";
 		break;
 
-            case 'add':
-		return "${tab}+ {$node['name']}: " . getFormattedValue($node['value'], $depth);    
+	    case 'add':
+		$formattedValue = getFormattedValue($node['value'], $depth);
+		return "${tab}+ {$node['name']}: $formattedValue";    
 		break;
 
 	    case 'unchanged':
-	        return "${tab}  {$node['name']}: " . getFormattedValue($node['value'], $depth);
+		$formattedValue = getFormattedValue($node['value'], $depth);
+		return "${tab}  {$node['name']}: $formattedValue";
 	        break;
 
 	    case 'changed':
-                $removed = "${tab}- ${node['name']}: " . getFormattedValue($node['oldValue'], $depth) . "\n";
-                $add = "${tab}" . "+ {$node['name']}: " . getFormattedValue($node['newValue'], $depth);
+		$formattedOldValue = getFormattedValue($node['oldValue'], $depth);
+                $formattedNewValue = getFormattedValue($node['newValue'], $depth);    
+		$removed = "${tab}- ${node['name']}: $formattedOldValue \n";
+                $add = "${tab}" . "+ {$node['name']}: $formattedNewValue";
 		return $removed . $add;
                 break;
 
 	    case 'nested':
-                return "${tab} {$node['name']}: " . iter($node['children'], $depth + 4);
+                return " ${tab} {$node['name']}: " . iter($node['children'], $depth + 4);
                 break;
 	}
     }, $array);
 
     $resultString = implode("\n", $result);
-    return "{\n" . $resultString . "\n${newTab}}";
+    return "{\n" . $resultString . "\n${closableTab}}";
 
+}
+
+function creatTab($depth)
+{
+    return str_repeat(' ', $depth);    
 }
 
 function getFormattedDiff($array)
 {
-    return iter($array, 3);  	    
+    return iter($array, 2);  	    
 }
 
 
@@ -61,16 +70,16 @@ function getFormattedValue($value, $depth)
     if (!is_array($value)) {
         return $value;
     }
-    
-    $newDepth = $depth;
-    $tab = str_repeat(' ', $depth);
-    $newTab = str_repeat(' ', $newDepth + 4);
 
-    $result = array_map(function ($key) use ($value, $newDepth, $tab, $newTab) {
-        $formattedValue = getFormattedValue($value[$key], $newDepth + 4);
+    $tab = creatTab($depth);
+    $newTab = creatTab($depth + 4);
+    $closableTab = creatTab($depth);
+
+    $result = array_map(function ($key) use ($value, $depth, $tab, $newTab, $closableTab) {
+        $formattedValue = getFormattedValue($value[$key], $depth + 4);
 	  return "${newTab}{$key}: {$formattedValue}";
     }, array_keys($value));
 
-       return "{\n" . implode("\n", $result) . "\n${tab}}";
+    return "{\n" . implode("\n", $result) . "\n${closableTab}}";
 
 }

@@ -7,11 +7,7 @@
 namespace Differ\Differ\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
-
-function getFormatFile($fileName)
-{
-    return pathinfo($fileName, PATHINFO_EXTENSION);
-}
+use Exception;
 
 function parse($fileName, $fileFormat)
 {
@@ -20,4 +16,5 @@ function parse($fileName, $fileFormat)
     } elseif ($fileFormat === 'yml') {
             return Yaml::parse(file_get_contents($fileName));
     }
+    throw new \Exception("This format cannot be processed. \n");
 }

@@ -3,7 +3,6 @@
 namespace Differ\Differ\Differ;
 
 use function Differ\Differ\Parsers\parse;
-use function Differ\Differ\Parsers\getFormatFile;
 use function Differ\Differ\Diff\getDiff;
 use function Differ\Differ\Pretty\addOuterBreckets;
 use function Differ\Differ\Pretty\getFormattedDiff;
@@ -11,28 +10,31 @@ use function Differ\Differ\Plain\plain;
 
 use Exception;
 
-function getFormatRequest($formatRequest, $tree)
+function getFormatFile($fileName)
 {
-      
-	if ($formatRequest === 'pretty') {
-            return getFormattedDiff($tree);
-        } elseif ($formatRequest === 'plain') {
-              return plain($tree);  
-	}
+    return pathinfo($fileName, PATHINFO_EXTENSION);
+}
 
-	throw new \Exception("Not correct format. \n");
+function getFormatRequest($formatRequest, $tree)
+{      
+    if ($formatRequest === 'pretty') {
+        return getFormattedDiff($tree);
+    } elseif ($formatRequest === 'plain') {
+          return plain($tree);  
+    }
+    throw new \Exception("There is no such input format. \n");
     
 }
 
-function comparison($firstFile, $secondFile, $formatRequest = 'pretty')
+function comparison($firstFileName, $secondFileName, $formatRequest = 'pretty')
 {
-    $fileFormat1 = getFormatFile($firstFile);
-    $array1 = parse($firstFile, $fileFormat1);
+    $firstFileFormat = getFormatFile($firstFileName);
+    $arrayFirstFile = parse($firstFileName, $firstFileFormat);
 
-    $fileFormat2 = getFormatFile($secondFile);
-    $array2 = parse($secondFile, $fileFormat2);
+    $secondFileFormat = getFormatFile($secondFileName);
+    $arraySecondFile = parse($secondFileName, $secondFileFormat);
 
-    $tree = getDiff($array1, $array2);
+    $tree = getDiff($arrayFirstFile, $arraySecondFile);
 
-        return getFormatRequest($formatRequest, $tree);
+    return getFormatRequest($formatRequest, $tree);
 }

@@ -10,26 +10,28 @@ use Exception;
 function iter($array, $depth, $parent)
 {
     $result = array_map(function ($node) use ($depth, $array, $parent) {
-
-        $sFullPath = "${parent}{$node['name']}";
+        $stringFullPath = "${parent}.{$node['name']}";
         
         switch ($node['type']) {
 	    case 'removed':
-	        return "Property '${sFullPath}' was removed";
+	        return "Property '${stringFullPath}' was removed";
 		break;
 
 	    case 'add':
-                return "Property '${sFullPath}' was added with value: " . getFormattedValue($node['value'], $depth);
+		$formattedValue = getFormattedValue($node['value'], $depth);    
+                return "Property '${stringFullPath}' was added with value: ${formattedValue}";
                 break;
 
 	    case 'changed':
-                $oldValue = "Property '${sFullPath}' updated. From " . getFormattedValue($node['oldValue'], $depth);
-                $newValue = " to " . getFormattedValue($node['newValue'], $depth);
-		return $oldValue . $newValue;
+                $formattedOldValue = getFormattedValue($node['oldValue'], $depth);
+                $formattedNewValue = getFormattedValue($node['newValue'], $depth); 
+		$stringOldValue = "Property '${stringFullPath}' updated. From ${formattedOldValue} ";
+                $stringNewValue = " to ${formattedNewValue} ";
+		return $stringOldValue . $stringNewValue;
 		break;
 
             case 'nested':
-		    return iter($node['children'], $depth + 5, $sFullPath . ".");
+		    return iter($node['children'], $depth + 5, $stringFullPath);
 		    break;
 
 	    case 'unchanged': 
@@ -38,17 +40,10 @@ function iter($array, $depth, $parent)
 	    default:
                 Print_r("Error ${node['type']} \n");	
 	}
-
     }, $array);
-
     $resultFlatten = compact(flattenAll($result));
-  
-
     $resultString = implode("\n", $resultFlatten);
-        
-   
-        return $resultString;
-    
+    return $resultString;
 }
 
 function plain($array)
@@ -59,13 +54,11 @@ function plain($array)
 
 function getFormattedValue($value, $depth)
 {
-
     if (is_bool($value)) {
         return $value ? 'true' : 'false';
     }
     if (!is_array($value)) {
         return "'${value}'";
     }
-
     return "[complex value]";
 }
