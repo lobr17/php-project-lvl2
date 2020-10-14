@@ -13,33 +13,33 @@ function iter($array, $depth, $parent)
         $stringFullPath = "${parent}.{$node['name']}";
         
         switch ($node['type']) {
-	    case 'removed':
-	        return "Property '${stringFullPath}' was removed";
-		break;
+            case 'removed':
+                return "Property '${stringFullPath}' was removed";
+            break;
 
-	    case 'add':
-		$formattedValue = getFormattedValue($node['value'], $depth);    
+            case 'add':
+                $formattedValue = getFormattedValue($node['value'], $depth);
                 return "Property '${stringFullPath}' was added with value: ${formattedValue}";
                 break;
 
-	    case 'changed':
+            case 'changed':
                 $formattedOldValue = getFormattedValue($node['oldValue'], $depth);
-                $formattedNewValue = getFormattedValue($node['newValue'], $depth); 
-		$stringOldValue = "Property '${stringFullPath}' updated. From ${formattedOldValue} ";
+                $formattedNewValue = getFormattedValue($node['newValue'], $depth);
+                $stringOldValue = "Property '${stringFullPath}' updated. From ${formattedOldValue} ";
                 $stringNewValue = " to ${formattedNewValue} ";
-		return $stringOldValue . $stringNewValue;
-		break;
+                return $stringOldValue . $stringNewValue;
+            break;
 
             case 'nested':
-		    return iter($node['children'], $depth + 5, $stringFullPath);
-		    break;
+                return iter($node['children'], $depth + 5, $stringFullPath);
+            break;
 
-	    case 'unchanged': 
-	        break;	    
+            case 'unchanged':
+                break;
 
-	    default:
-                Print_r("Error ${node['type']} \n");	
-	}
+            default:
+                Print_r("Error ${node['type']} \n");
+        }
     }, $array);
     $resultFlatten = compact(flattenAll($result));
     $resultString = implode("\n", $resultFlatten);

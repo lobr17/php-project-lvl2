@@ -16,14 +16,13 @@ function getFormatFile($fileName)
 }
 
 function getFormatRequest($formatRequest, $tree)
-{      
+{
     if ($formatRequest === 'pretty') {
         return getFormattedDiff($tree);
     } elseif ($formatRequest === 'plain') {
-          return plain($tree);  
+          return plain($tree);
     }
     throw new \Exception("There is no such input format. \n");
-    
 }
 
 function comparison($firstFileName, $secondFileName, $formatRequest = 'pretty')
