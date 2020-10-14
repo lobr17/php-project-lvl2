@@ -3,6 +3,7 @@
 namespace Differ\Differ\Differ;
 
 use Exception;
+
 use function Differ\Differ\Parsers\parse;
 use function Differ\Differ\Diff\getDiff;
 use function Differ\Differ\Pretty\addOuterBreckets;

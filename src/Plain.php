@@ -3,6 +3,7 @@
 namespace Differ\Differ\Plain;
 
 use Exception;
+
 use function Funct\Collection\flattenAll;
 use function Funct\Collection\compact;
 
