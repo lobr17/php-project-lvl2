@@ -16,5 +16,5 @@ function parse($fileName, $fileFormat)
     } elseif ($fileFormat === 'yml') {
             return Yaml::parse(file_get_contents($fileName));
     }
-    throw new \Exception("This format cannot be processed. \n");
+    throw new \Exception("Format '${fileFormat}' cannot be processed.");
 }

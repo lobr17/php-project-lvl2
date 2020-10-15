@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b5ec00b33670d1dacebefe9443c2c3fd",
+    "content-hash": "0d118db4d0b422dfbf20e82165ebc332",
     "packages": [
         {
             "name": "docopt/docopt",
@@ -2276,16 +2276,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.5.6",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "e97627871a7eab2f70e59166072a6b767d5834e0"
+                "reference": "d4ba5fc8183e6fc0c5e2b891bc1d8f9f0d34512d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e97627871a7eab2f70e59166072a6b767d5834e0",
-                "reference": "e97627871a7eab2f70e59166072a6b767d5834e0",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/d4ba5fc8183e6fc0c5e2b891bc1d8f9f0d34512d",
+                "reference": "d4ba5fc8183e6fc0c5e2b891bc1d8f9f0d34512d",
                 "shasum": ""
             },
             "require": {
@@ -2323,7 +2323,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2020-08-10T04:50:15+00:00"
+            "time": "2020-10-13T22:05:34+00:00"
         },
         {
             "name": "symfony/config",
@@ -2953,7 +2953,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "squizlabs/php_codesniffer": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

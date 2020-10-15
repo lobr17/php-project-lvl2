@@ -24,16 +24,19 @@
     },
     "autoload": {	
     	"files": [
-	"src/Diff.php",
+	"src/TreeBuilder.php",
 	"src/Parsers.php",
 	"src/Differ.php",
 	"src/Pretty.php",
 	"src/Plain.php",
+	"src/FormatRequest.php",
+	"tests/fixtures/testJson.php",
+	"tests/fixtures/testJsonPlain.php",
 	"./vendor/symfony/yaml/Yaml.php"
 	]
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "*",
+        "squizlabs/php_codesniffer": "dev-master",
         "codeclimate/php-test-reporter": "^0.4.4",
         "phpunit/phpunit": "^8.5"
     }

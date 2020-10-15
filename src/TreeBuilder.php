@@ -4,9 +4,9 @@
  * Определение разности массивов.
  */
 
-namespace Differ\Differ\Diff;
+namespace Differ\Differ\TreeBuilder;
 
-function getDiff($array1, $array2)
+function getTree($array1, $array2)
 {
     $keys1 = array_keys($array1);
     $keys2 = array_keys($array2);
@@ -18,7 +18,7 @@ function getDiff($array1, $array2)
         } elseif (!array_key_exists($key, $array1)) {
             return ['name' => $key, 'type' => 'add', 'value' => $array2[$key]];
         } elseif (is_array($array1[$key]) and is_array($array2[$key])) {
-            return ['name' => $key, 'type' => 'nested', 'children' => getDiff($array1[$key], $array2[$key])];
+            return ['name' => $key, 'type' => 'nested', 'children' => getTree($array1[$key], $array2[$key])];
         } elseif ($array1[$key] === $array2[$key]) {
             return ['name' => $key, 'type' => 'unchanged', 'value' => $array1[$key]];
         } else {

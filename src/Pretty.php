@@ -10,8 +10,8 @@ use function Funct\Collection\flattenAll;
 
 function iter($array, $depth)
 {
-    $tab = creatTab($depth);
-    $closableTab = creatTab($depth - 2);
+    $tab = createTab($depth);
+    $closableTab = createTab($depth - 1);// NO
 
     $result = array_map(function ($node) use ($depth, $tab) {
         switch ($node['type']) {
@@ -33,13 +33,13 @@ function iter($array, $depth)
             case 'changed':
                 $formattedOldValue = getFormattedValue($node['oldValue'], $depth);
                 $formattedNewValue = getFormattedValue($node['newValue'], $depth);
-                $removed = "${tab}- ${node['name']}: $formattedOldValue \n";
-                $add = "${tab}" . "+ {$node['name']}: $formattedNewValue";
-                return $removed . $add;
+                $removed = "${tab}- ${node['name']}: $formattedOldValue\n";
+                $added = "${tab}+ {$node['name']}: $formattedNewValue";
+                return $removed . $added;
                 break;
 
             case 'nested':
-                return " ${tab} {$node['name']}: " . iter($node['children'], $depth + 4);
+                return " ${tab} {$node['name']}: " . iter($node['children'], $depth + 2);// NO
                 break;
         }
     }, $array);
@@ -48,20 +48,20 @@ function iter($array, $depth)
     return "{\n" . $resultString . "\n${closableTab}}";
 }
 
-function creatTab($depth)
+function createTab($depth)
 {
-    return str_repeat(' ', $depth);
+    return str_repeat('  ', $depth);
 }
 
 function getFormattedDiff($array)
 {
-    return iter($array, 2);
+    return iter($array, 1);
 }
 
 
 function getFormattedValue($value, $depth)
 {
-        
+
     if (is_bool($value)) {
         return $value ? 'true' : 'false';
     }
@@ -70,12 +70,12 @@ function getFormattedValue($value, $depth)
         return $value;
     }
 
-    $tab = creatTab($depth);
-    $newTab = creatTab($depth + 4);
-    $closableTab = creatTab($depth);
+    $tab = createTab($depth);
+    $newTab = createTab($depth + 2);
+    $closableTab = createTab($depth + 1);
 
     $result = array_map(function ($key) use ($value, $depth, $tab, $newTab, $closableTab) {
-        $formattedValue = getFormattedValue($value[$key], $depth + 4);
+        $formattedValue = getFormattedValue($value[$key], $depth + 1); // Blizko
         return "${newTab}{$key}: {$formattedValue}";
     }, array_keys($value));
 
