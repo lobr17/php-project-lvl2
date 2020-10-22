@@ -29,7 +29,9 @@
 	"src/Differ.php",
 	"src/Pretty.php",
 	"src/Plain.php",
-	"src/FormatRequest.php",
+	"src/format/Format.php",
+	"src/format/PlainFormat.php",
+	"src/format/PrettyFormat.php",
 	"tests/fixtures/testJson.php",
 	"tests/fixtures/testJsonPlain.php",
 	"./vendor/symfony/yaml/Yaml.php"

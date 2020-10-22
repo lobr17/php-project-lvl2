@@ -4,7 +4,7 @@ namespace Differ\Differ\Differ;
 
 use function Differ\Differ\Parsers\parse;
 use function Differ\Differ\TreeBuilder\getTree;
-use function Differ\Differ\FormatRequest\getFormatRequest;
+use function Differ\Differ\format\Format\getFormatRequest;
 
 function getFormatFile($fileName)
 {
@@ -15,12 +15,12 @@ function getFormatFile($fileName)
 function compareFiles($firstFileName, $secondFileName, $formatRequest = 'pretty')
 {
     $firstFileFormat = getFormatFile($firstFileName);
-    $dataFirstFile = parse($firstFileName, $firstFileFormat);
+    $firstData = parse($firstFileName, $firstFileFormat);
 
     $secondFileFormat = getFormatFile($secondFileName);
-    $dataSecondFile = parse($secondFileName, $secondFileFormat);
+    $secondData = parse($secondFileName, $secondFileFormat);
 
-    $tree = getTree($dataFirstFile, $dataSecondFile);
+    $tree = getTree($firstData, $secondData);
 
     return getFormatRequest($formatRequest, $tree);
 }

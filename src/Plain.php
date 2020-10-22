@@ -4,8 +4,7 @@ namespace Differ\Differ\Plain;
 
 use Exception;
 
-use function Funct\Collection\flattenAll;
-use function Funct\Collection\compact;
+use function Funct\Collection\flatten;
 
 function iter($array, $parent)
 {
@@ -14,41 +13,31 @@ function iter($array, $parent)
 
         switch ($node['type']) {
             case 'removed':
-                return "Property '${stringFullPath}' was removed";
-            break;
+            return "Property '${stringFullPath}' was removed";
 
             case 'add':
                 $formattedValue = getFormattedValue($node['value']);
                 return "Property '${stringFullPath}' was added with value: ${formattedValue}";
-                break;
 
             case 'changed':
                 $formattedOldValue = getFormattedValue($node['oldValue']);
                 $formattedNewValue = getFormattedValue($node['newValue']);
                 return "Property '${stringFullPath}' updated. From ${formattedOldValue} to ${formattedNewValue} "; // phpcs:ignore
-            break;
 
             case 'nested':
                 return iter($node['children'], $stringFullPath . ".");
-            break;
 
-            case 'unchanged':
-                break;
+	    case 'unchanged':
+		return []; 
 
             default:
                 Print_r("Error. Not correct value type '${node['type']}'");
         }
     }, $array);
-    $resultFlatten = compact(flattenAll($result));
+    $resultFlatten = flatten($result);
     $resultString = implode("\n", $resultFlatten);
     return $resultString;
 }
-
-function getFormattedDiff($array)
-{
-    return iter($array, $parent = null) . "\n";
-}
-
 
 function getFormattedValue($value)
 {

@@ -6,29 +6,24 @@
 
 namespace Differ\Differ\Pretty;
 
-use function Funct\Collection\flattenAll;
-
 function iter($array, $depth)
 {
     $tab = createTab($depth);
-    $closableTab = createTab($depth - 1);// NO
+    $closableTab = createTab($depth - 1);
 
     $result = array_map(function ($node) use ($depth, $tab) {
         switch ($node['type']) {
             case 'removed':
                 $formattedValue = getFormattedValue($node['value'], $depth);
                 return "${tab}- {$node['name']}: $formattedValue";
-            break;
 
             case 'add':
                 $formattedValue = getFormattedValue($node['value'], $depth);
                 return "${tab}+ {$node['name']}: $formattedValue";
-            break;
 
             case 'unchanged':
                 $formattedValue = getFormattedValue($node['value'], $depth);
                 return "${tab}  {$node['name']}: $formattedValue";
-            break;
 
             case 'changed':
                 $formattedOldValue = getFormattedValue($node['oldValue'], $depth);
@@ -36,11 +31,10 @@ function iter($array, $depth)
                 $removed = "${tab}- ${node['name']}: $formattedOldValue\n";
                 $added = "${tab}+ {$node['name']}: $formattedNewValue";
                 return $removed . $added;
-                break;
 
             case 'nested':
-                return " ${tab} {$node['name']}: " . iter($node['children'], $depth + 2);// NO
-                break;
+                return " ${tab} {$node['name']}: " . iter($node['children'], $depth + 2);
+
         }
     }, $array);
 
@@ -52,12 +46,6 @@ function createTab($depth)
 {
     return str_repeat('  ', $depth);
 }
-
-function getFormattedDiff($array)
-{
-    return iter($array, 1);
-}
-
 
 function getFormattedValue($value, $depth)
 {

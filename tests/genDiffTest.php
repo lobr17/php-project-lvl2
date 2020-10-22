@@ -4,41 +4,39 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 
-use function Differ\Differ\Parsers\getArrayForTree;
-use function Differ\Differ\TreeBuilder\getTree;
-use function Differ\Differ\Render\getFormattedDiff;
-use function Differ\Differ\formatters\Plain\plain;
-use function Differ\Differ\FormatRequest\getFormatRequest;
 use function Tests\fixtures\getDataComparisonJson;
 use function Tests\fixtures\getDataComparisonJsonPlain;
 
+use function Differ\Differ\Differ\compareFiles;
+
 class DiffTest1 extends TestCase
 {
-    public function testDiff()
+    public function creatNameFixtures($nameFile)
     {
-        $array1 = json_decode(file_get_contents(__DIR__ . '/fixtures/before.json'), true);
-        $array2 = json_decode(file_get_contents(__DIR__ . '/fixtures/after.json'), true);
+            return __DIR__ . "/fixtures/${nameFile}";
+    }    
+ 
+    public function testDiffPretty()
+    {  
+    	$this->creatNameFixtures($nameFile);
 
-        $tree = getTree($array1, $array2);
+	$expected = getDataComparisonJson();
 
-        $actual = getFormatRequest('pretty', $tree);
+	$nameFileBefore = creatNameFixtures('before.json');
+	$nameFileAfter = creatNameFixtures('after.json');
+	$actual = compareFiles($nameFileBefore, $nameFileAfter, 'pretty');
 
-        $expected = getDataComparisonJson();
-
-        $this->assertEquals($expected, $actual);
+	$this->assertEquals($expected, $actual);
     }
 
-    public function testDiffPlain()
+   /* public function testDiffPlain()
     {
-        $array1 = json_decode(file_get_contents(__DIR__ . '/fixtures/before.json'), true);
-        $array2 = json_decode(file_get_contents(__DIR__ . '/fixtures/after.json'), true);
-
-        $tree = getTree($array1, $array2);
-
-        $actual = getFormatRequest('plain', $tree);
+        $actual = compareFiles(__DIR__ . '/fixtures/before.json', __DIR__ . '/fixtures/after.json', 'plain');
 
         $expected = getDataComparisonJsonPlain();
 
         $this->assertEquals($expected, $actual);
-    }
+   }*/
+
+
 }
