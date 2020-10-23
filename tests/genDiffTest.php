@@ -17,26 +17,26 @@ class DiffTest1 extends TestCase
     }    
  
     public function testDiffPretty()
-    {  
-    	$this->creatNameFixtures($nameFile);
-
+    {     	
 	$expected = getDataComparisonJson();
 
-	$nameFileBefore = creatNameFixtures('before.json');
-	$nameFileAfter = creatNameFixtures('after.json');
+	$nameFileBefore = $this->creatNameFixtures('before.json');
+	$nameFileAfter = $this->creatNameFixtures('after.json');
 	$actual = compareFiles($nameFileBefore, $nameFileAfter, 'pretty');
 
 	$this->assertEquals($expected, $actual);
     }
 
-   /* public function testDiffPlain()
+    public function testDiffPlain()
     {
-        $actual = compareFiles(__DIR__ . '/fixtures/before.json', __DIR__ . '/fixtures/after.json', 'plain');
-
         $expected = getDataComparisonJsonPlain();
 
+        $nameFileBefore = $this->creatNameFixtures('before.json');
+        $nameFileAfter = $this->creatNameFixtures('after.json');
+        $actual = compareFiles($nameFileBefore, $nameFileAfter, 'plain');
+
         $this->assertEquals($expected, $actual);
-   }*/
+   }
 
 
 }
