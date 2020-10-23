@@ -8,5 +8,3 @@ function getFormattedDiff($array)
 {
     return iter($array, 1);
 }
-
-

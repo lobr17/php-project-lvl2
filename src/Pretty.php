@@ -34,7 +34,6 @@ function iter($array, $depth)
 
             case 'nested':
                 return " ${tab} {$node['name']}: " . iter($node['children'], $depth + 2);
-
         }
     }, $array);
 

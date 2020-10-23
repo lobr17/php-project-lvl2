@@ -15,7 +15,7 @@ function getFormatRequest($formatName, $tree)
     } elseif ($formatName === 'plain') {
         return getPlain($tree);
     } elseif ($formatName === 'json') {
-       return getJson($tree);     
+        return getJson($tree);
     }
     throw new \Exception("There is no such input format '${formatName}'");
 }

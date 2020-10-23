@@ -13,7 +13,7 @@ function iter($array, $parent)
 
         switch ($node['type']) {
             case 'removed':
-            return "Property '${stringFullPath}' was removed";
+                return "Property '${stringFullPath}' was removed";
 
             case 'add':
                 $formattedValue = getFormattedValue($node['value']);
@@ -27,8 +27,8 @@ function iter($array, $parent)
             case 'nested':
                 return iter($node['children'], $stringFullPath . ".");
 
-	    case 'unchanged':
-		return []; 
+            case 'unchanged':
+                return [];
 
             default:
                 Print_r("Error. Not correct value type '${node['type']}'");
