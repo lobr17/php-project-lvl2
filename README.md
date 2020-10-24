@@ -17,7 +17,7 @@ Via Composer
 <pre>$ composer global require yason/gendiff:dev-master</pre>
 
 ## Три формата вывода.
-Входные файлы могут *.json / *.yml
+Входные файлы могут быть *.json / *.yml
 
  <pre>$Рекурсивное сравнение.
  https://asciinema.org/a/IawnocoXee3a0JP3gC3HyIOLs
