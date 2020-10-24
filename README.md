@@ -11,6 +11,11 @@ Create folder .composer in /home/$name/
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/3a5a41d6543119ed677f/test_coverage)](https://codeclimate.com/github/lobr17/php-project-lvl2/test_coverage)
 
+## Installation
+Via Composer
+
+<pre>$ composer global require yason/gendiff:dev-master</pre>
+
 
 Сравнение плоских файлов (JSON).
 https://asciinema.org/a/dO6ypyzYS6mir4gnCmfn8Etqx
