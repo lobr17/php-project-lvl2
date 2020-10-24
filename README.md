@@ -20,14 +20,14 @@ Via Composer
 Входные файлы могут *.json / *.yml
 
  <pre>$Рекурсивное сравнение.
- https://asciinema.org/a/dO6ypyzYS6mir4gnCmfn8Etqx
+ https://asciinema.org/a/IawnocoXee3a0JP3gC3HyIOLs
  </pre>
 
  <pre>$Плоский формат.
- https://asciinema.org/a/tK5iU3UqVaesdNDINl1I6i6in
+ https://asciinema.org/a/rZvXzFiFqqOKcmvmAQbufjAGy
  </pre>
  
  <pre>$Json формат.
- https://asciinema.org/a/c5gNUxsMclZFvW4PRtrzcnq8U
+ https://asciinema.org/a/qWgVD2zXFIxPEY6T4IsAxVEpm
  </pre>
  
