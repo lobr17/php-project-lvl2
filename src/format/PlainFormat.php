@@ -1,10 +1,10 @@
 <?php
 
-namespace Differ\Differ\format\PlainFormat;
+namespace Differ\PlainFormat;
 
-use function Differ\Differ\Plain\iter;
+use function Differ\Plain\getOutputData;
 
 function getFormattedDiff($array)
 {
-    return iter($array, $parent = null) . "\n";
+    return getOutputData($array, $parent = null) . "\n";
 }

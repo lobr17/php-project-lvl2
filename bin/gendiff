@@ -10,7 +10,8 @@ if (file_exists($autoloadPath1)) {
 }
 
 
-use function Differ\Differ\Differ\compareFiles;
+//use function Differ\Differ\Differ\compareFiles;
+use function Differ\Differ\compareFiles;
 
 $doc = <<<DOC
 Generate diff

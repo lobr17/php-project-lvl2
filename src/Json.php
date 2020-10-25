@@ -1,8 +1,8 @@
 <?php
 
-namespace Differ\Differ\Json;
+namespace Differ\Json;
 
-function iter($array)
+function getOutputData($array)
 {
      return json_encode($array, true);
 }

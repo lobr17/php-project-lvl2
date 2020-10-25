@@ -1,12 +1,12 @@
 <?php
 
-namespace Differ\Differ\Plain;
+namespace Differ\Plain;
 
 use Exception;
 
 use function Funct\Collection\flatten;
 
-function iter($array, $parent)
+function getOutputData($array, $parent)
 {
     $result = array_map(function ($node) use ($array, $parent) {
         $stringFullPath = "${parent}{$node['name']}";
@@ -25,7 +25,7 @@ function iter($array, $parent)
                 return "Property '${stringFullPath}' updated. From ${formattedOldValue} to ${formattedNewValue} "; // phpcs:ignore
 
             case 'nested':
-                return iter($node['children'], $stringFullPath . ".");
+                return getOutputData($node['children'], $stringFullPath . ".");
 
             case 'unchanged':
                 return [];

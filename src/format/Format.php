@@ -1,14 +1,14 @@
 <?php
 
-namespace Differ\Differ\format\Format;
+namespace Differ\Format;
 
 use Exception;
 
-use function Differ\Differ\format\PrettyFormat\getFormattedDiff as getPretty;
-use function Differ\Differ\format\PlainFormat\getFormattedDiff as getPlain;
-use function Differ\Differ\format\JsonFormat\getFormattedDiff as getJson;
+use function Differ\PrettyFormat\getFormattedDiff as getPretty;
+use function Differ\PlainFormat\getFormattedDiff as getPlain;
+use function Differ\Json\getOutputData as getJson;
 
-function getFormatRequest($formatName, $tree)
+function getFormat($formatName, $tree)
 {
     if ($formatName === 'pretty') {
         return getPretty($tree);

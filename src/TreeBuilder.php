@@ -4,7 +4,7 @@
  * Определение разности массивов.
  */
 
-namespace Differ\Differ\TreeBuilder;
+namespace Differ\TreeBuilder;
 
 function getTree($array1, $array2)
 {

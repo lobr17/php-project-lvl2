@@ -4,7 +4,7 @@
  * Парсинг.
  */
 
-namespace Differ\Differ\Parsers;
+namespace Differ\Parsers;
 
 use Symfony\Component\Yaml\Yaml;
 use Exception;
