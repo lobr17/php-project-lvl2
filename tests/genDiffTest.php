@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 use function Tests\fixtures\getDataComparisonJson;
 use function Tests\fixtures\getDataComparisonJsonPlain;
-use function Differ\Differ\Differ\compareFiles;
+use function Differ\Differ\compareFiles;
 
 class DiffTest1 extends TestCase
 {

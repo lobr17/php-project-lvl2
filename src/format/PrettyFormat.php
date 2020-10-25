@@ -69,4 +69,3 @@ function getFormattedValue($value, $depth)
 
     return "{\n" . implode("\n", $result) . "\n${closableTab}}";
 }
-
