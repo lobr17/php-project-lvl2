@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ\PrettyFormat;
+namespace Differ\Formatters\Pretty;
 
 function getFormattedDiff($array)
 {

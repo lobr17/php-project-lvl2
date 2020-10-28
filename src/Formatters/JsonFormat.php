@@ -1,6 +1,6 @@
 <?php
 
-namespace Differ\Json;
+namespace Differ\Formatters\Json;
 
 function getOutputData($array)
 {

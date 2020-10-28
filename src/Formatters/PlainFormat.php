@@ -1,10 +1,15 @@
 <?php
 
-namespace Differ\Plain;
+namespace Differ\Formatters\Plain;
 
 use Exception;
 
 use function Funct\Collection\flatten;
+
+function getFormattedDiff($array)
+{
+    return getOutputData($array, $parent = null) . "\n";
+}
 
 function getOutputData($array, $parent)
 {
