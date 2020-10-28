@@ -8,12 +8,12 @@ use function Funct\Collection\flatten;
 
 function getFormattedDiff($array)
 {
-    return getOutputData($array, $parent = null) . "\n";
+    return iter($array, $parent = null) . "\n";
 }
 
-function getOutputData($array, $parent)
+function iter($array, $parent)
 {
-    $result = array_map(function ($node) use ($array, $parent) {
+    $lines = array_map(function ($node) use ($array, $parent) {
         $stringFullPath = "${parent}{$node['name']}";
 
         switch ($node['type']) {
@@ -30,18 +30,18 @@ function getOutputData($array, $parent)
                 return "Property '${stringFullPath}' updated. From ${formattedOldValue} to ${formattedNewValue} "; // phpcs:ignore
 
             case 'nested':
-                return getOutputData($node['children'], $stringFullPath . ".");
+                return iter($node['children'], $stringFullPath . ".");
 
             case 'unchanged':
                 return [];
 
             default:
-                Print_r("Error. Not correct value type '${node['type']}'");
+                throw new \Exception("Error. Not correct value type '${node['type']}'");
         }
     }, $array);
-    $resultFlatten = flatten($result);
-    $resultString = implode("\n", $resultFlatten);
-    return $resultString;
+    $resultFlatten = flatten($lines);
+    $result = implode("\n", $resultFlatten);
+    return $result;
 }
 
 function getFormattedValue($value)

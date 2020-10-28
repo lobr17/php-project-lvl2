@@ -6,7 +6,6 @@ use Exception;
 
 use function Differ\Formatters\Pretty\getFormattedDiff as getPretty;
 use function Differ\Formatters\Plain\getFormattedDiff as getPlain;
-use function Differ\Formatters\Json\getOutputData as getJson;
 
 function format($formatName, $tree)
 {
@@ -15,7 +14,7 @@ function format($formatName, $tree)
     } elseif ($formatName === 'plain') {
         return getPlain($tree);
     } elseif ($formatName === 'json') {
-        return getJson($tree);
+        return json_encode($tree, true);
     }
     throw new \Exception("There is no such input format '${formatName}'");
 }

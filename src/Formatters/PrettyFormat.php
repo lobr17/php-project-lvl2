@@ -2,12 +2,14 @@
 
 namespace Differ\Formatters\Pretty;
 
+use Exception;
+
 function getFormattedDiff($array)
 {
-    return creatOutputData($array, 1);
+    return iter($array, 1);
 }
 
-function creatOutputData($array, $depth)
+function iter($array, $depth)
 {
     $tab = createTab($depth);
     $closableTab = createTab($depth - 1);
@@ -34,7 +36,11 @@ function creatOutputData($array, $depth)
                 return $removed . $added;
 
             case 'nested':
-                return " ${tab} {$node['name']}: " . creatOutputData($node['children'], $depth + 2);
+	        return " ${tab} {$node['name']}: " . iter($node['children'], $depth + 2);
+
+            default:
+                throw new \Exception("Error. Not correct value type '${node['type']}'");
+		    
         }
     }, $array);
 

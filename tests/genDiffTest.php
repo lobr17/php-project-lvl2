@@ -4,20 +4,21 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 
-use function Tests\fixtures\getDataComparisonJson;
+use function Tests\fixtures\getDataComparisonJsonPretty;
 use function Tests\fixtures\getDataComparisonJsonPlain;
+use function Tests\fixtures\getDataComparisonJson;
 use function Differ\Differ\compareFiles;
 
 class DiffTest1 extends TestCase
 {
     public function creatNameFixtures($nameFile)
     {
-            return __DIR__ . "/fixtures/${nameFile}";
+       return __DIR__ . "/fixtures/${nameFile}";
     }
 
     public function testDiffPretty()
     {
-        $expected = getDataComparisonJson();
+        $expected = getDataComparisonJsonPretty();
 
         $nameFileBefore = $this->creatNameFixtures('before.json');
         $nameFileAfter = $this->creatNameFixtures('after.json');
@@ -33,6 +34,17 @@ class DiffTest1 extends TestCase
         $nameFileBefore = $this->creatNameFixtures('before.json');
         $nameFileAfter = $this->creatNameFixtures('after.json');
         $actual = compareFiles($nameFileBefore, $nameFileAfter, 'plain');
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testDiffJson()
+    {
+        $expected = getDataComparisonJson();
+
+        $nameFileBefore = $this->creatNameFixtures('before.json');
+        $nameFileAfter = $this->creatNameFixtures('after.json');
+        $actual = compareFiles($nameFileBefore, $nameFileAfter, 'json');
 
         $this->assertEquals($expected, $actual);
     }
