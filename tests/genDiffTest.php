@@ -13,7 +13,7 @@ class DiffTest1 extends TestCase
 {
     public function creatNameFixtures($nameFile)
     {
-       return __DIR__ . "/fixtures/${nameFile}";
+        return __DIR__ . "/fixtures/${nameFile}";
     }
 
     public function testDiffPretty()

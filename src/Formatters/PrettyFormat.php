@@ -36,11 +36,10 @@ function iter($array, $depth)
                 return $removed . $added;
 
             case 'nested':
-	        return " ${tab} {$node['name']}: " . iter($node['children'], $depth + 2);
+                return " ${tab} {$node['name']}: " . iter($node['children'], $depth + 2);
 
             default:
                 throw new \Exception("Error. Not correct value type '${node['type']}'");
-		    
         }
     }, $array);
 
