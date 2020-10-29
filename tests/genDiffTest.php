@@ -32,7 +32,7 @@ class DiffTest1 extends TestCase
         $expected = getDataComparisonJsonPlain();
 
         $nameFileBefore = $this->creatNameFixtures('before.json');
-        $nameFileAfter = $this->creatNameFixtures('after.json');
+        $nameFileAfter = $this->creatNameFixtures('after.yml');
         $actual = compareFiles($nameFileBefore, $nameFileAfter, 'plain');
 
         $this->assertEquals($expected, $actual);
