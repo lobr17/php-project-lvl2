@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests\fixtures;
+
 // @codingStandardsIgnoreStart
 function getDataComparisonJson()
 {
