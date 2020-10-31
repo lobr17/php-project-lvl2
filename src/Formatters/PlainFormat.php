@@ -13,24 +13,25 @@ function getFormattedDiff($array)
 
 function iter($array, $parent)
 {
-    $lines = array_map(function ($node) use ($array, $parent) {
-        $stringFullPath = "${parent}{$node['name']}";
-
+    
+    $lines = array_map(function ($node) use ($array, $parent) {	    
+	$namePath = implode([$parent . "." . $node['name']]);    
+ 
         switch ($node['type']) {
             case 'removed':
-                return "Property '${stringFullPath}' was removed";
+                return "Property '${namePath}' was removed";
 
             case 'add':
                 $formattedValue = getFormattedValue($node['value']);
-                return "Property '${stringFullPath}' was added with value: ${formattedValue}";
+                return "Property '${namePath}' was added with value: ${formattedValue}";
 
             case 'changed':
                 $formattedOldValue = getFormattedValue($node['oldValue']);
                 $formattedNewValue = getFormattedValue($node['newValue']);
-                return "Property '${stringFullPath}' updated. From ${formattedOldValue} to ${formattedNewValue} "; // phpcs:ignore
+                return "Property '${namePath}' updated. From ${formattedOldValue} to ${formattedNewValue} "; // phpcs:ignore
 
             case 'nested':
-                return iter($node['children'], $stringFullPath . ".");
+                return iter($node['children'], $namePath);
 
             case 'unchanged':
                 return [];
