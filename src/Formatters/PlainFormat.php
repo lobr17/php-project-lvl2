@@ -6,6 +6,8 @@ use Exception;
 
 use function Funct\Collection\flatten;
 
+
+
 function getFormattedDiff($array)
 {
     return iter($array, $parent = null) . "\n";
@@ -13,9 +15,11 @@ function getFormattedDiff($array)
 
 function iter($array, $parent)
 {
-
     $lines = array_map(function ($node) use ($array, $parent) {
-        $namePath = implode([$parent . "." . $node['name']]);
+       
+	$partsPath = [$parent, $node['name']];    
+	$resultPath = array_diff($partsPath, ['']);
+        $namePath = implode(".", $resultPath);
 
         switch ($node['type']) {
             case 'removed':
