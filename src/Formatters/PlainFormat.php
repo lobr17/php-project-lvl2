@@ -13,10 +13,10 @@ function getFormattedDiff($array)
 
 function iter($array, $parent)
 {
-    
-    $lines = array_map(function ($node) use ($array, $parent) {	    
-	$namePath = implode([$parent . "." . $node['name']]);    
- 
+
+    $lines = array_map(function ($node) use ($array, $parent) {
+        $namePath = implode([$parent . "." . $node['name']]);
+
         switch ($node['type']) {
             case 'removed':
                 return "Property '${namePath}' was removed";
