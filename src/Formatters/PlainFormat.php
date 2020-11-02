@@ -14,10 +14,7 @@ function getFormattedDiff($array)
 function iter($array, $parent)
 {
     $lines = array_map(function ($node) use ($array, $parent) {
-
-        $partsPath = [$parent, $node['name']];
-        $resultPath = array_diff($partsPath, ['']);
-        $namePath = implode(".", $resultPath);
+        $namePath = "${parent}{$node['name']}";
 
         switch ($node['type']) {
             case 'removed':
@@ -33,7 +30,7 @@ function iter($array, $parent)
                 return "Property '${namePath}' updated. From ${formattedOldValue} to ${formattedNewValue} "; // phpcs:ignore
 
             case 'nested':
-                return iter($node['children'], $namePath);
+                return iter($node['children'], $namePath . ".");
 
             case 'unchanged':
                 return [];
