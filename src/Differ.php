@@ -11,7 +11,6 @@ function getFormatFile($fileName)
     return pathinfo($fileName, PATHINFO_EXTENSION);
 }
 
-
 function compareFiles($firstFileName, $secondFileName, $formatName = 'pretty')
 {
     $firstFileFormat = getFormatFile($firstFileName);

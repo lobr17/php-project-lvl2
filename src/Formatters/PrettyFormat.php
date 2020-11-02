@@ -44,7 +44,8 @@ function iter($array, $depth)
     }, $array);
 
     $resultString = implode("\n", $result);
-    return "{\n" . $resultString . "\n${closableTab}}";
+    //return "{\n" . $resultString . "\n${closableTab}}";
+    return "{\n${resultString}\n${closableTab}}";
 }
 
 function createTab($depth)
