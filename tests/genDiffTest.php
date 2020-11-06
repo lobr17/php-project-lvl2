@@ -15,9 +15,9 @@ class DiffTest1 extends TestCase
 
     public function testDiffPretty()
     {
-        $fullFileName = $this->addPath('testJsonPretty');	
-	$getDirtyFile = file_get_contents($fullFileName);
-        $expected = trim($getDirtyFile);	
+        $fullFileName = $this->addPath('testJsonPretty');
+        $getDirtyFile = file_get_contents($fullFileName);
+        $expected = trim($getDirtyFile);
 
         $pathFileBefore = $this->addPath('before.json');
         $pathFileAfter = $this->addPath('after.json');
