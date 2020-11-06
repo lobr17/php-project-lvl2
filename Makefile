@@ -1,4 +1,4 @@
-iinstall:
+install:
 	composer install	
 
 lint:
