@@ -15,8 +15,8 @@ class DiffTest1 extends TestCase
 
     public function testDiffPretty()
     {
-        $fileName = __DIR__ . "/fixtures/testJsonPretty";	
-	$getDirtyFile = file_get_contents($fileName);
+        $fullFileName = $this->addPath('testJsonPretty');	
+	$getDirtyFile = file_get_contents($fullFileName);
         $expected = trim($getDirtyFile);	
 
         $pathFileBefore = $this->addPath('before.json');
@@ -28,8 +28,8 @@ class DiffTest1 extends TestCase
 
     public function testDiffPlain()
     {
-        $fileName = __DIR__ . "/fixtures/testJsonPlain";
-        $getDirtyFile = file_get_contents($fileName);
+        $fullFileName = $this->addPath('testJsonPlain');
+        $getDirtyFile = file_get_contents($fullFileName);
         $expected = $getDirtyFile;
 
         $pathFileBefore = $this->addPath('before.json');
@@ -41,8 +41,8 @@ class DiffTest1 extends TestCase
 
     public function testDiffJson()
     {
-        $fileName = __DIR__ . "/fixtures/testJson";
-        $getDirtyFile = file_get_contents($fileName);
+        $fullFileName = $this->addPath('testJson');
+        $getDirtyFile = file_get_contents($fullFileName);
         $expected = trim($getDirtyFile);
 
         $pathFileBefore = $this->addPath('before.json');
