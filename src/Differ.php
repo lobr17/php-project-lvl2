@@ -14,10 +14,12 @@ function getFormatFile($fileName)
 function compareFiles($firstFileName, $secondFileName, $formatName = 'pretty')
 {
     $firstFileFormat = getFormatFile($firstFileName);
-    $firstData = parse($firstFileName, $firstFileFormat);
+    $firstFileData = file_get_contents($firstFileName);
+    $firstData = parse($firstFileData, $firstFileFormat);
 
     $secondFileFormat = getFormatFile($secondFileName);
-    $secondData = parse($secondFileName, $secondFileFormat);
+    $secondFileData = file_get_contents($secondFileName);
+    $secondData = parse($secondFileData, $secondFileFormat);
 
     $tree = getTree($firstData, $secondData);
 

@@ -30,9 +30,6 @@
 	"src/Formatters/Format.php",
 	"src/Formatters/PlainFormat.php",
 	"src/Formatters/PrettyFormat.php",
-	"tests/fixtures/testJsonPretty.php",
-	"tests/fixtures/testJsonPlain.php",
-	"tests/fixtures/testJson.php",
 	"./vendor/symfony/yaml/Yaml.php"
 	]
     },

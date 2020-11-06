@@ -1,11 +1,3 @@
-<?php
-
-namespace Tests\fixtures;
-
-function getDataComparisonJsonPretty()
-{
-
-    return <<<DOC
 {
     common: {
       + follow: false
@@ -51,6 +43,4 @@ function getDataComparisonJsonPretty()
         }
       }
     }
-}
-DOC;
 }

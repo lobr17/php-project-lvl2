@@ -4,47 +4,50 @@ namespace Tests;
 
 use PHPUnit\Framework\TestCase;
 
-use function Tests\fixtures\getDataComparisonJsonPretty;
-use function Tests\fixtures\getDataComparisonJsonPlain;
-use function Tests\fixtures\getDataComparisonJson;
 use function Differ\Differ\compareFiles;
 
 class DiffTest1 extends TestCase
 {
-    public function creatNameFixtures($nameFile)
+    public function addPath($fileName)
     {
-        return __DIR__ . "/fixtures/${nameFile}";
+        return __DIR__ . "/fixtures/${fileName}";
     }
 
     public function testDiffPretty()
     {
-        $expected = getDataComparisonJsonPretty();
+        $fileName = __DIR__ . "/fixtures/testJsonPretty";	
+	$getDirtyFile = file_get_contents($fileName);
+        $expected = trim($getDirtyFile);	
 
-        $nameFileBefore = $this->creatNameFixtures('before.json');
-        $nameFileAfter = $this->creatNameFixtures('after.json');
-        $actual = compareFiles($nameFileBefore, $nameFileAfter, 'pretty');
+        $pathFileBefore = $this->addPath('before.json');
+        $pathFileAfter = $this->addPath('after.json');
+        $actual = compareFiles($pathFileBefore, $pathFileAfter, 'pretty');
 
         $this->assertEquals($expected, $actual);
     }
 
     public function testDiffPlain()
     {
-        $expected = getDataComparisonJsonPlain();
+        $fileName = __DIR__ . "/fixtures/testJsonPlain";
+        $getDirtyFile = file_get_contents($fileName);
+        $expected = $getDirtyFile;
 
-        $nameFileBefore = $this->creatNameFixtures('before.json');
-        $nameFileAfter = $this->creatNameFixtures('after.yml');
-        $actual = compareFiles($nameFileBefore, $nameFileAfter, 'plain');
+        $pathFileBefore = $this->addPath('before.json');
+        $pathFileAfter = $this->addPath('after.yml');
+        $actual = compareFiles($pathFileBefore, $pathFileAfter, 'plain');
 
         $this->assertEquals($expected, $actual);
     }
 
     public function testDiffJson()
     {
-        $expected = getDataComparisonJson();
+        $fileName = __DIR__ . "/fixtures/testJson";
+        $getDirtyFile = file_get_contents($fileName);
+        $expected = trim($getDirtyFile);
 
-        $nameFileBefore = $this->creatNameFixtures('before.json');
-        $nameFileAfter = $this->creatNameFixtures('after.json');
-        $actual = compareFiles($nameFileBefore, $nameFileAfter, 'json');
+        $pathFileBefore = $this->addPath('before.json');
+        $pathFileAfter = $this->addPath('after.json');
+        $actual = compareFiles($pathFileBefore, $pathFileAfter, 'json');
 
         $this->assertEquals($expected, $actual);
     }

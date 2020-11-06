@@ -9,12 +9,12 @@ namespace Differ\Parsers;
 use Symfony\Component\Yaml\Yaml;
 use Exception;
 
-function parse($fileName, $fileFormat)
+function parse($fileData, $fileFormat)
 {
     if ($fileFormat === 'json') {
-        return json_decode(file_get_contents($fileName), true);
+        return json_decode($fileData, true);
     } elseif ($fileFormat === 'yml') {
-        return Yaml::parse(file_get_contents($fileName));
+        return Yaml::parse($fileData);
     }
     throw new \Exception("Format '${fileFormat}' cannot be processed.");
 }
