@@ -1,4 +1,4 @@
-install:
+iinstall:
 	composer install	
 
 lint:
@@ -11,4 +11,4 @@ test:
 	composer run-script test
 
 coverage:
-	--coverage-clover build/logs/clover.xml
+	composer run-script test --coverage-clover build/logs/clover.xml
