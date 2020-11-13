@@ -19,15 +19,15 @@ Via Composer
 ## Три формата вывода.
 Входные файлы могут быть *.json / *.yml
 
- <pre>$Рекурсивное сравнение.
+ <pre>$Рекурсивное сравнение.</pre>
  https://asciinema.org/a/IawnocoXee3a0JP3gC3HyIOLs
 
 
- <pre>$Плоский формат.
+ <pre>$Плоский формат.</pre>
  https://asciinema.org/a/rZvXzFiFqqOKcmvmAQbufjAGy
  
  
- <pre>$Json формат.
+ <pre>$Json формат.</pre>
  https://asciinema.org/a/qWgVD2zXFIxPEY6T4IsAxVEpm
  
  
