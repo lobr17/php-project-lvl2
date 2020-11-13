@@ -21,13 +21,13 @@ Via Composer
 
  <pre>$Рекурсивное сравнение.
  https://asciinema.org/a/IawnocoXee3a0JP3gC3HyIOLs
- </pre>
+
 
  <pre>$Плоский формат.
  https://asciinema.org/a/rZvXzFiFqqOKcmvmAQbufjAGy
- </pre>
+ 
  
  <pre>$Json формат.
  https://asciinema.org/a/qWgVD2zXFIxPEY6T4IsAxVEpm
- </pre>
+ 
  
