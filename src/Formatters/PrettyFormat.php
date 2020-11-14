@@ -12,7 +12,7 @@ function getFormattedDiff($array)
 function iter($array, $depth)
 {
     $tab = createTab($depth);
-    $closableTab = createTab($depth - 1);
+    $closeTab = createTab($depth - 1);
 
     $result = array_map(function ($node) use ($depth, $tab) {
         switch ($node['type']) {
@@ -44,8 +44,7 @@ function iter($array, $depth)
     }, $array);
 
     $resultString = implode("\n", $result);
-    //return "{\n" . $resultString . "\n${closableTab}}";
-    return "{\n${resultString}\n${closableTab}}";
+    return "{\n${resultString}\n${closeTab}}";
 }
 
 function createTab($depth)
@@ -66,12 +65,12 @@ function getFormattedValue($value, $depth)
 
     $tab = createTab($depth);
     $newTab = createTab($depth + 2);
-    $closableTab = createTab($depth + 1);
+    $closeTab = createTab($depth + 1);
 
-    $result = array_map(function ($key) use ($value, $depth, $tab, $newTab, $closableTab) {
+    $result = array_map(function ($key) use ($value, $depth, $tab, $newTab, $closeTab) {
         $formattedValue = getFormattedValue($value[$key], $depth + 1);
         return "${newTab}{$key}: {$formattedValue}";
     }, array_keys($value));
 
-    return "{\n" . implode("\n", $result) . "\n${closableTab}}";
+    return "{\n" . implode("\n", $result) . "\n${closeTab}}";
 }

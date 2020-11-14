@@ -8,47 +8,60 @@ use function Differ\Differ\compareFiles;
 
 class DiffTest1 extends TestCase
 {
-    public function addPath($fileName)
+    public function getFixtureFullPath($fileName)
     {
         return __DIR__ . "/fixtures/${fileName}";
     }
 
     public function testDiffPretty()
     {
-        $fullFileName = $this->addPath('testJsonPretty');
-        $getDirtyFile = file_get_contents($fullFileName);
-        $expected = trim($getDirtyFile);
+        $filePath = $this->getFixtureFullPath('testJsonPretty');
+        $dirtyFile = file_get_contents($filePath);
+        $expected = trim($dirtyFile);
 
-        $pathFileBefore = $this->addPath('before.json');
-        $pathFileAfter = $this->addPath('after.json');
-        $actual = compareFiles($pathFileBefore, $pathFileAfter, 'pretty');
+        $fileBeforePath = $this->getFixtureFullPath('before.json');
+        $fileAfterPath = $this->getFixtureFullPath('after.json');
+        $actual = compareFiles($fileBeforePath, $fileAfterPath, 'pretty');
 
         $this->assertEquals($expected, $actual);
     }
 
     public function testDiffPlain()
     {
-        $fullFileName = $this->addPath('testJsonPlain');
-        $getDirtyFile = file_get_contents($fullFileName);
-        $expected = $getDirtyFile;
+        $filePath = $this->getFixtureFullPath('testJsonPlain');
+        $dirtyFile = file_get_contents($filePath);
+        $expected = $dirtyFile;
 
-        $pathFileBefore = $this->addPath('before.json');
-        $pathFileAfter = $this->addPath('after.yml');
-        $actual = compareFiles($pathFileBefore, $pathFileAfter, 'plain');
+        $fileBeforePath = $this->getFixtureFullPath('before.json');
+        $fileAfterPath = $this->getFixtureFullPath('after.yml');
+        $actual = compareFiles($fileBeforePath, $fileAfterPath, 'plain');
 
         $this->assertEquals($expected, $actual);
     }
 
     public function testDiffJson()
     {
-        $fullFileName = $this->addPath('testJson');
-        $getDirtyFile = file_get_contents($fullFileName);
-        $expected = trim($getDirtyFile);
+        $filePath = $this->getFixtureFullPath('testJson');
+        $dirtyFile = file_get_contents($filePath);
+        $expected = trim($dirtyFile);
 
-        $pathFileBefore = $this->addPath('before.json');
-        $pathFileAfter = $this->addPath('after.json');
-        $actual = compareFiles($pathFileBefore, $pathFileAfter, 'json');
+        $fileBeforePath = $this->getFixtureFullPath('before.json');
+        $fileAfterPath = $this->getFixtureFullPath('after.json');
+        $actual = compareFiles($fileBeforePath, $fileAfterPath, 'json');
 
         $this->assertEquals($expected, $actual);
-    }
+ }
+
+/*    public function testDiffJson()
+    {
+        $filePath = $this->getFixtureFullPath('testJson');
+        $dirtyFile = file_get_contents($filePath);
+        $expected = trim($dirtyFile);
+
+        $fileBeforePath = $this->getFixtureFullPath('before.json');
+        $fileAfterPath = $this->getFixtureFullPath('after.json');
+        $actual = compareFiles($fileBeforePath, $fileAfterPath, 'json');
+
+        $this->assertStringEqualsFile($filePath, $actual);
+}*/
 }

@@ -6,22 +6,22 @@ use function Differ\Parsers\parse;
 use function Differ\TreeBuilder\getTree;
 use function Differ\Format\format;
 
-function getFormatFile($fileName)
+function getFormatData($fileName)
 {
     return pathinfo($fileName, PATHINFO_EXTENSION);
 }
 
-function compareFiles($firstFileName, $secondFileName, $formatName = 'pretty')
+function compareFiles($firstName, $secondName, $nameFormat = 'pretty')
 {
-    $firstFileFormat = getFormatFile($firstFileName);
-    $firstFileData = file_get_contents($firstFileName);
-    $firstData = parse($firstFileData, $firstFileFormat);
+    $firstFormat = getFormatData($firstName);
+    $firstFileData = file_get_contents($firstName);
+    $firstData = parse($firstFileData, $firstFormat);
 
-    $secondFileFormat = getFormatFile($secondFileName);
-    $secondFileData = file_get_contents($secondFileName);
-    $secondData = parse($secondFileData, $secondFileFormat);
+    $secondFormat = getFormatData($secondName);
+    $secondFileData = file_get_contents($secondName);
+    $secondData = parse($secondFileData, $secondFormat);
 
     $tree = getTree($firstData, $secondData);
 
-    return format($formatName, $tree);
+    return format($nameFormat, $tree);
 }
