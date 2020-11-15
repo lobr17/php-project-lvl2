@@ -30,7 +30,7 @@ class DiffTest1 extends TestCase
     {
         $filePath = $this->getFixtureFullPath('testJsonPlain');
         $dirtyFile = file_get_contents($filePath);
-        $expected = $dirtyFile;
+        $expected = trim($dirtyFile);
 
         $fileBeforePath = $this->getFixtureFullPath('before.json');
         $fileAfterPath = $this->getFixtureFullPath('after.yml');
@@ -50,18 +50,5 @@ class DiffTest1 extends TestCase
         $actual = compareFiles($fileBeforePath, $fileAfterPath, 'json');
 
         $this->assertEquals($expected, $actual);
- }
-
-/*    public function testDiffJson()
-    {
-        $filePath = $this->getFixtureFullPath('testJson');
-        $dirtyFile = file_get_contents($filePath);
-        $expected = trim($dirtyFile);
-
-        $fileBeforePath = $this->getFixtureFullPath('before.json');
-        $fileAfterPath = $this->getFixtureFullPath('after.json');
-        $actual = compareFiles($fileBeforePath, $fileAfterPath, 'json');
-
-        $this->assertStringEqualsFile($filePath, $actual);
-}*/
+    }
 }

@@ -63,11 +63,10 @@ function getFormattedValue($value, $depth)
         return $value;
     }
 
-    $tab = createTab($depth);
     $newTab = createTab($depth + 2);
     $closeTab = createTab($depth + 1);
 
-    $result = array_map(function ($key) use ($value, $depth, $tab, $newTab, $closeTab) {
+    $result = array_map(function ($key) use ($value, $depth, $newTab, $closeTab) {
         $formattedValue = getFormattedValue($value[$key], $depth + 1);
         return "${newTab}{$key}: {$formattedValue}";
     }, array_keys($value));

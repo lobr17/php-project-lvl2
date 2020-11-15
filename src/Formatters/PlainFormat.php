@@ -8,7 +8,7 @@ use function Funct\Collection\flatten;
 
 function getFormattedDiff($array)
 {
-	return iter($array, $parent = null) . "\n";
+    return iter($array, $parent = null);
 }
 
 function iter($array, $parent)
