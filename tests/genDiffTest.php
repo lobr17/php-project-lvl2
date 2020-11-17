@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Differ\genDiffTest;
 
 use PHPUnit\Framework\TestCase;
 
@@ -15,9 +15,9 @@ class DiffTest1 extends TestCase
 
     public function testDiffPretty()
     {
-        $filePath = $this->getFixtureFullPath('testJsonPretty');
-        $dirtyFile = file_get_contents($filePath);
-        $expected = trim($dirtyFile);
+        $filePath = $this->getFixtureFullPath('testPretty');
+        $dirtyData = file_get_contents($filePath);
+        $expected = trim($dirtyData);
 
         $fileBeforePath = $this->getFixtureFullPath('before.json');
         $fileAfterPath = $this->getFixtureFullPath('after.json');
@@ -28,9 +28,9 @@ class DiffTest1 extends TestCase
 
     public function testDiffPlain()
     {
-        $filePath = $this->getFixtureFullPath('testJsonPlain');
-        $dirtyFile = file_get_contents($filePath);
-        $expected = trim($dirtyFile);
+        $filePath = $this->getFixtureFullPath('testPlain');
+        $dirtyData = file_get_contents($filePath);
+        $expected = trim($dirtyData);
 
         $fileBeforePath = $this->getFixtureFullPath('before.json');
         $fileAfterPath = $this->getFixtureFullPath('after.yml');
@@ -42,8 +42,8 @@ class DiffTest1 extends TestCase
     public function testDiffJson()
     {
         $filePath = $this->getFixtureFullPath('testJson');
-        $dirtyFile = file_get_contents($filePath);
-        $expected = trim($dirtyFile);
+        $dirtyData = file_get_contents($filePath);
+        $expected = trim($dirtyData);
 
         $fileBeforePath = $this->getFixtureFullPath('before.json');
         $fileAfterPath = $this->getFixtureFullPath('after.json');

@@ -13,8 +13,9 @@ function iter($array, $depth)
 {
     $tab = createTab($depth);
     $closeTab = createTab($depth - 1);
+    $childDepth = $depth + 1;
 
-    $result = array_map(function ($node) use ($depth, $tab) {
+    $result = array_map(function ($node) use ($depth, $tab, $childDepth) {
         switch ($node['type']) {
             case 'removed':
                 $formattedValue = getFormattedValue($node['value'], $depth);
@@ -36,7 +37,7 @@ function iter($array, $depth)
                 return $removed . $added;
 
             case 'nested':
-                return " ${tab} {$node['name']}: " . iter($node['children'], $depth + 2);
+                return " ${tab} {$node['name']}: " . iter($node['children'], $childDepth + 1);
 
             default:
                 throw new \Exception("Error. Not correct value type '${node['type']}'");
