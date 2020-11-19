@@ -11,10 +11,10 @@ function getFormattedDiff($array)
 
 function iter($array, $depth)
 {
-    $tab = createTab($depth);
-    $closeTab = createTab($depth - 1);
+    $tab = creatTab($depth * 4 - 2);
+    $closeTab = creatTab($depth * 4 - 4);
     $childDepth = $depth + 1;
-
+ 
     $result = array_map(function ($node) use ($depth, $tab, $childDepth) {
         switch ($node['type']) {
             case 'removed':
@@ -37,7 +37,7 @@ function iter($array, $depth)
                 return $removed . $added;
 
             case 'nested':
-                return " ${tab} {$node['name']}: " . iter($node['children'], $childDepth + 1);
+                return " ${tab} {$node['name']}: " . iter($node['children'], $childDepth);
 
             default:
                 throw new \Exception("Error. Not correct value type '${node['type']}'");
@@ -45,12 +45,16 @@ function iter($array, $depth)
     }, $array);
 
     $resultString = implode("\n", $result);
+    
+    if ($depth === 1) {
+        return "{\n${resultString}\n}";
+    }
     return "{\n${resultString}\n${closeTab}}";
 }
 
-function createTab($depth)
+function creatTab($depth)
 {
-    return str_repeat('  ', $depth);
+    return str_repeat(' ', $depth);
 }
 
 function getFormattedValue($value, $depth)
@@ -64,13 +68,19 @@ function getFormattedValue($value, $depth)
         return $value;
     }
 
-    $newTab = createTab($depth + 2);
-    $closeTab = createTab($depth + 1);
+    if (is_null($value)) {
+        return 'null';
+    }
+
+    $newTab = creatTab($depth * 4 + 4);
+    $closeTab = creatTab($depth * 4);
 
     $result = array_map(function ($key) use ($value, $depth, $newTab, $closeTab) {
         $formattedValue = getFormattedValue($value[$key], $depth + 1);
         return "${newTab}{$key}: {$formattedValue}";
     }, array_keys($value));
 
-    return "{\n" . implode("\n", $result) . "\n${closeTab}}";
+        return "{\n" . implode("\n", $result) . "\n${closeTab}}";
+    
+ 
 }
