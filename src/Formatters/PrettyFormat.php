@@ -14,7 +14,7 @@ function iter($array, $depth)
     $tab = creatTab($depth * 4 - 2);
     $closeTab = creatTab($depth * 4 - 4);
     $childDepth = $depth + 1;
- 
+
     $result = array_map(function ($node) use ($depth, $tab, $childDepth) {
         switch ($node['type']) {
             case 'removed':
@@ -45,7 +45,7 @@ function iter($array, $depth)
     }, $array);
 
     $resultString = implode("\n", $result);
-    
+
     if ($depth === 1) {
         return "{\n${resultString}\n}";
     }
@@ -66,8 +66,8 @@ function getFormattedValue($value, $depth)
 
     if (!is_array($value)) {
         if (is_null($value)) {
-            return 'null';    		    
-	}
+            return 'null';
+        }
         return $value;
     }
 
@@ -80,6 +80,4 @@ function getFormattedValue($value, $depth)
     }, array_keys($value));
 
         return "{\n" . implode("\n", $result) . "\n${closeTab}}";
-    
- 
 }
