@@ -65,11 +65,10 @@ function getFormattedValue($value, $depth)
     }
 
     if (!is_array($value)) {
+        if (is_null($value)) {
+            return 'null';    		    
+	}
         return $value;
-    }
-
-    if (is_null($value)) {
-        return 'null';
     }
 
     $newTab = creatTab($depth * 4 + 4);
