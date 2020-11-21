@@ -11,14 +11,14 @@ function getFormatData($fileName)
     return pathinfo($fileName, PATHINFO_EXTENSION);
 }
 
-function compareFiles($firstName, $secondName, $nameFormat = 'pretty')
+function compareFiles($firstFileName, $secondFileName, $nameFormat = 'pretty')
 {
-    $firstFormat = getFormatData($firstName);
-    $firstFileData = file_get_contents($firstName);
+    $firstFormat = getFormatData($firstFileName);
+    $firstFileData = file_get_contents($firstFileName);
     $firstData = parse($firstFileData, $firstFormat);
 
-    $secondFormat = getFormatData($secondName);
-    $secondFileData = file_get_contents($secondName);
+    $secondFormat = getFormatData($secondFileName);
+    $secondFileData = file_get_contents($secondFileName);
     $secondData = parse($secondFileData, $secondFormat);
 
     $tree = getTree($firstData, $secondData);

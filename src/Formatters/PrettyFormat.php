@@ -45,10 +45,6 @@ function iter($array, $depth)
     }, $array);
 
     $resultString = implode("\n", $result);
-
-    if ($depth === 1) {
-        return "{\n${resultString}\n}";
-    }
     return "{\n${resultString}\n${closeTab}}";
 }
 
