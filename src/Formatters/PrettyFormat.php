@@ -4,12 +4,12 @@ namespace Differ\Formatters\Pretty;
 
 use Exception;
 
-function getFormattedDiff($array)
+function getFormattedDiff($tree)
 {
-    return iter($array, 1);
+    return iter($tree, 1);
 }
 
-function iter($array, $depth)
+function iter($tree, $depth)
 {
     $tab = creatTab($depth * 4 - 2);
     $closeTab = creatTab($depth * 4 - 4);
@@ -37,12 +37,12 @@ function iter($array, $depth)
                 return $removed . $added;
 
             case 'nested':
-                return " ${tab} {$node['name']}: " . iter($node['children'], $childDepth);
+                return "${tab}  {$node['name']}: " . iter($node['children'], $childDepth);
 
             default:
                 throw new \Exception("Error. Not correct value type '${node['type']}'");
         }
-    }, $array);
+    }, $tree);
 
     $resultString = implode("\n", $result);
     return "{\n${resultString}\n${closeTab}}";
@@ -75,5 +75,5 @@ function getFormattedValue($value, $depth)
         return "${newTab}{$key}: {$formattedValue}";
     }, array_keys($value));
 
-        return "{\n" . implode("\n", $result) . "\n${closeTab}}";
+    return "{\n" . implode("\n", $result) . "\n${closeTab}}";
 }

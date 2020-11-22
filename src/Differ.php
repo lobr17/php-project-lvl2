@@ -11,7 +11,7 @@ function getFormatData($fileName)
     return pathinfo($fileName, PATHINFO_EXTENSION);
 }
 
-function compareFiles($firstFileName, $secondFileName, $nameFormat = 'pretty')
+function compareFiles($firstFileName, $secondFileName, $formatName = 'pretty')
 {
     $firstFormat = getFormatData($firstFileName);
     $firstFileData = file_get_contents($firstFileName);
@@ -23,5 +23,5 @@ function compareFiles($firstFileName, $secondFileName, $nameFormat = 'pretty')
 
     $tree = getTree($firstData, $secondData);
 
-    return format($nameFormat, $tree);
+    return format($formatName, $tree);
 }

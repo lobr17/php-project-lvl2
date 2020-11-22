@@ -6,14 +6,14 @@ use Exception;
 
 use function Funct\Collection\flatten;
 
-function getFormattedDiff($array)
+function getFormattedDiff($tree)
 {
-    return iter($array, $parent = null);
+    return iter($tree, $parent = null);
 }
 
-function iter($array, $parent)
+function iter($tree, $parent)
 {
-    $lines = array_map(function ($node) use ($array, $parent) {
+    $lines = array_map(function ($node) use ($tree, $parent) {
         $namePath = "${parent}{$node['name']}";
 
         switch ($node['type']) {
@@ -38,7 +38,7 @@ function iter($array, $parent)
             default:
                 throw new \Exception("Error. Not correct value type '${node['type']}'");
         }
-    }, $array);
+    }, $tree);
     $resultFlatten = flatten($lines);
     $result = implode("\n", $resultFlatten);
     return $result;
