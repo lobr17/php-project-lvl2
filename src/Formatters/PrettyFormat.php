@@ -11,8 +11,8 @@ function getFormattedDiff($tree)
 
 function iter($tree, $depth)
 {
-    $tab = creatTab($depth * 4 - 2);
-    $closeTab = creatTab($depth * 4 - 4);
+    $tab = createTab($depth * 4 - 2);
+    $closeTab = createTab($depth * 4 - 4);
     $childDepth = $depth + 1;
 
     $result = array_map(function ($node) use ($depth, $tab, $childDepth) {
@@ -48,7 +48,7 @@ function iter($tree, $depth)
     return "{\n${resultString}\n${closeTab}}";
 }
 
-function creatTab($depth)
+function createTab($depth)
 {
     return str_repeat(' ', $depth);
 }
@@ -67,8 +67,8 @@ function getFormattedValue($value, $depth)
         return $value;
     }
 
-    $newTab = creatTab($depth * 4 + 4);
-    $closeTab = creatTab($depth * 4);
+    $newTab = createTab($depth * 4 + 4);
+    $closeTab = createTab($depth * 4);
 
     $result = array_map(function ($key) use ($value, $depth, $newTab, $closeTab) {
         $formattedValue = getFormattedValue($value[$key], $depth + 1);
